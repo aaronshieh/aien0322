@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="zh-tw">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .st1{
+        border: 1px solid red;
+        border-radius:10px;
+        width: 500px;
+        margin: auto;
+    }
+    .st2{
+        border-bottom: 2px solid purple;
+        padding-bottom: 10px;
+        margin-left: 20px;
+        margin: 20px;
+        
+    }
+    .st3{
+        margin:10px 200px;
+    }
+    .st4{
+        padding-left:10px;
+        color: darkgrey;
+        font-size: 3px;
+    }
+    input{
+        margin:10px 0px;     
+    }
+    label{
+        padding-left: 10px;
+    }
+ 
+</style>
+<body>    
+        <form action="" method="GET">
+            <fieldset class="st1">
+                <legend>Form Check</legend>
+            <div class="st2">
+                <label>姓名:</label><input type="text" id="nameid" name="name" placeholder="輸入中名字"><span id="spid"></span>
+                <div class="st4">(1.不能空白，2.至少2個字以上，3.必須全部中文字)</div>
+            </div>
+
+            <div class="st2">
+                <label>密碼:</label><input type="password" id="pwdid" name="pwdname" placeholder="請輸入密碼" ><span id="pwdspn"></span>
+                <div class="st4">(1.不能空白，2.至少6個字且必須包含英文字母、數字、特殊字元字元[!@#$%^&*])</div>
+            </div>
+
+            <div class="st2">
+                <label>日期:</label><input type="text" id="dateid" name="datename" placeholder="ex:2000/02/29" ><span id="datespn"></span>
+                <div class="st4">格式:西元年/月/日 yyyy/MM/dd</div>
+            </div>
+            <div class="st3">
+                <input type="submit" value="送出" >
+                <input type="reset" value="清除">
+                <!-- <img src='image/p1.jpg'>
+                <img src='image/p2.png'> -->
+            </div>
+        </fieldset>
+        </form>
+        <script>
+        document.getElementById("nameid").addEventListener("blur",namef);
+        document.getElementById("pwdid").addEventListener("blur",pwdf);
+        document.getElementById("dateid").addEventListener("blur",datef);
+        function namef(){
+            var char =document.getElementById("nameid").value;
+            for(i=0;i<char.length;i++){
+                if(char.charCodeAt(i)< 0X4E00 || char.charCodeAt(i)>0X9FFF){
+                    document.getElementById("spid").innerHTML="<img src='image/p2.png'>只能輸入中文字"
+                }
+                else
+                    document.getElementById("spid").innerHTML="<img src='image/p1.jpg'>"
+            }
+        }
+        function pwdf(){
+            var thepwd =document.getElementById("pwdid").value;
+            var thelength =thepwd.length;
+            var flag=false,flag2=false;
+            if(thepwd==""){
+                document.getElementById("pwdspn").innerHTML="<img src='image/p2.png'>請輸入密碼不能有空白"
+            }
+            if (thelength<6){
+                document.getElementById("pwdspn").innerHTML="<img src='image/p2.png'>密碼長度必須要6以上"
+            }
+            if(thelength>6){
+                for(i=0;i<thelength;i++){
+                   pwdchart=thepwd.charAt(i).toUpperCase();
+                   if(pwdchart>="A"&& pwdchart<="Z"){
+                       flag=true;
+                   }
+                   else if(pwdchart>="0" && pwdchart<="9"){
+                       flag2=true;
+                   }
+                   if(flag==true && flag2==true)
+                   {
+                       break;
+                   }
+                }  
+                if(flag==true && flag2==true){
+                    document.getElementById("pwdspn").innerHTML="<img src='image/p1.jpg'>"
+                }
+                 else
+                    document.getElementById("pwdspn").innerHTML="<img src='image/p2.png'>輸入錯誤" 
+            }                
+        }
+
+        function datef(){
+            var datevalue = document.getElementById("dateid").value;
+            var datecheck = new Date(datevalue);
+            var month = datecheck.getMonth()+1;
+            var datearry =  datevalue.split("/");
+            re = /\d{4}\/\d{2}\/\d{2}/
+            var checkst = re.test(datevalue)
+            console.log(checkst);
+            
+            if(datecheck == "Invalid Date" || datevalue==""|| month!=datearry[1] || checkst==false){
+                document.getElementById("datespn").innerHTML="<img src='image/p2.png'>格式錯誤"  
+            }
+            else
+                document.getElementById("datespn").innerHTML="<img src='image/p1.jpg'>"
+            
+
+        }
+        
+
+        </script>
+     
+</body>
+</html>

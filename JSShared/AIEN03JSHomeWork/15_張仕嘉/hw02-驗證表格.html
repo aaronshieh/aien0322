@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表格及內容驗證</title>
+    <style>
+        fieldset {width:500px;
+        border-radius: 15px;}
+        div {border-bottom: 1px solid gray;
+        padding:1em;}
+        p {color:gray;
+        font-size: 10px;}
+        .button {text-align: center;}
+    
+    </style>
+    
+</head>
+<body>
+    <fieldset>
+        <legend>
+            Form Check
+        </legend>
+        <div>
+            <label for="account">姓名:</label>
+            <input type="text" id="account" name="account" placeholder="請輸入姓名" onblur="chkAccount();">
+            <span id="accountsp"></span>
+            <br>
+            <p>(1.不可空白，2.至少兩個字以上，3.必須全為中文字)</p>
+        </div>
+        <div>
+            <label for="pwd">密碼:</label>
+            <input type="password" id="pwd" name="pwd" onblur="chkPassword();">
+            <span id="pwdsp"></span>
+            <br>
+            <p>(1.不可空白，2.至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*]</p>
+        </div>
+        <div>
+            <label for="day">日期:</label>
+            <input type="text" id="day" name="day" placeholder="請輸入日期(YYYY/MM/DD)" onblur="chkDay();">
+            <span id="daysp"></span>
+            <br>
+            <p>格式:西元年/月/日 yyyy/MM/dd</p>
+        </div>
+        <div class="button">
+        <input type="submit" value="送出">
+        <input type="reset" value="清除">
+        </div>
+        
+    </fieldset>
+    <script>
+        function chkAccount(){
+            var theName = document.getElementById("account").value;
+            var theNamelen = theName.length;
+            re = /[\u4E00-\u9FFF]{2,}/;
+            if (theName=="")
+                document.getElementById("accountsp").innerHTML="<img src='images/wrong.png'>此欄位必填！";
+            else if(theNamelen >= 2)
+                {if (re.test(theName))
+                    document.getElementById("accountsp").innerHTML="<img src='images/check.png'>姓名格式相符，請繼續輸入。";
+                else
+                    document.getElementById("accountsp").innerHTML="<img src='images/wrong.png'>姓名格式不符，請重新輸入。";
+                }
+            else
+                {   document.getElementById("accountsp").innerHTML="<img src='images/wrong.png'>姓名長度不符，請重新輸入。";
+                }      
+        }
+        function chkPassword() {
+            var thePwd = document.getElementById("pwd").value
+            var thePwdlen = thePwd.length;
+            var flag1 = false;
+            var flag2 = false;
+            var flag3 = false;
+            if (thePwd=="")
+                document.getElementById("pwdsp").innerHTML="<img src='images/wrong.png'>此欄位必填！";
+            else if (thePwdlen>=6)
+                {
+                    for(var i=0;i<thePwdlen;i++){
+                        var PwdChr=thePwd.charAt(i).toUpperCase();
+                        if (PwdChr>="A" && PwdChr<="Z")
+                            flag1=true;
+                        else if (PwdChr>="0" && PwdChr<="9")
+                            flag2=true;
+                        else if (thePwd.charAt(i)=="!"||thePwd.charAt(i)=="@"||thePwd.charAt(i)=="#"||thePwd.charAt(i)=="$"||thePwd.charAt(i)=="%"||thePwd.charAt(i)=="^"||thePwd.charAt(i)=="&"||thePwd.charAt(i)=="*")
+                            flag3=true;
+                        if (flag1 && flag2 && flag3)
+                            break;
+                    } 
+                    if (flag1 && flag2 && flag3)
+                        document.getElementById("pwdsp").innerHTML="<img src='images/check.png'>密碼格式相符，請繼續輸入。";
+                    else
+                        document.getElementById("pwdsp").innerHTML="<img src='images/wrong.png'>密碼格式不符，請重新輸入。";
+                }
+            else{
+                document.getElementById("pwdsp").innerHTML="<img src='images/wrong.png'>請輸入6碼以上，包含英文、數字及特殊符號之密碼";
+            }
+        }
+        function chkDay() {
+            var theDay = document.getElementById("day").value;
+            reday = /^\d{4}\/\d{2}\/\d{2}$/
+            console.log(theDay);
+            console.log(typeof(theDay));
+                if (reday.test(theDay)){
+                var theDay1 = theDay.split("/");
+                console.log(theDay1);
+                console.log(typeof(theDay1));
+                console.log(theDay1[0],theDay1[1],theDay1[2]);
+                console.log(typeof(theDay1[0]));
+                
+                var theDay2 = new Date(theDay1);
+                console.log(theDay2);
+                console.log(typeof(theDay2));
+                console.log(theDay2.getFullYear());
+                console.log(theDay2.getMonth());
+                console.log(theDay2.getDate());
+                console.log(typeof(theDay2.getFullYear()));
+                console.log(typeof(theDay2.getMonth()));
+                console.log(typeof(theDay2.getDate()));
+                if (theDay2.getFullYear()==parseInt(theDay1[0]) && theDay2.getMonth()+1 == parseInt(theDay1[1]) && theDay2.getDate()== parseInt(theDay1[2]))
+                    document.getElementById("daysp").innerHTML="<img src='images/check.png'>日期格式相符，請繼續輸入。";
+                else
+                    document.getElementById("daysp").innerHTML="<img src='images/wrong.png'>不是正確的日期，請重新輸入。";
+            }
+            else
+                document.getElementById("daysp").innerHTML="<img src='images/wrong.png'>輸入格式不符，請重新輸入。";
+
+        }
+    </script>    
+    
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>06arrayObject.html</title>
+</head>
+<body>
+
+    <script>
+        //建立陣列語法 1
+        var balls = new Array();
+        //alert(balls.length);
+        balls[0] = "basketball";
+        balls[1] = "baseball";
+        balls[2] = "tennis";
+        balls[3] = "volleyball";
+        balls[4] = 123;
+        //alert(balls.length);
+        //列印陣列語法 1
+        document.write(balls + "<br>");
+
+
+        //建立陣列語法 2
+        var cars = new Array("audi", "volkswagon", "bmw", 3);
+        document.write(cars + "<br>");
+
+        //建立陣列語法 3
+        //array literal
+        var fruits = ['apple','orange','banana','durian',4];
+        document.write(fruits + "<br>");
+
+        //列印陣列語法 2 -- 使用 for loop
+        fruits.forEach(function (val, i, arr) {
+            alert(i + " " + val);
+        });
+
+
+        //二維陣列
+        var myDatas = new Array();
+        myDatas[0] = new Array("apple", "banana", "grape");
+        myDatas[1] = new Array("pork", "beef");
+
+        var myDatas = [["apple", "banana", "grape"], ["pork", "beef"]];
+        //document.write(myDatas[1][0] + "<hr>");  //pork
+        // for (var i = 0, maxi = myDatas.length; i < maxi; i++) {
+        //     for (var j = 0, maxj = myDatas[i].length; j < maxj; j++) {
+        //         document.write(myDatas[i][j] + "<br>");
+        //     }
+        // }
+
+
+        //copy Lab12/01Cookie.html line 36~43
+        var strcookie = "name2=Mary;name=Jack";
+        
+                document.writeln("<table>");
+                cookieArray = strcookie.split(";");
+                for (var i = 0; i < cookieArray.length; i++) {
+                    thisCookie = cookieArray[i].split("=");
+                    cookieName = decodeURI(thisCookie[0]);
+                    cookieValue = decodeURI(thisCookie[1]);
+                    document.writeln("<tr><td style='border:solid red 2px'>" + cookieName + "</td><td style='border:solid red 2px'>" + cookieValue + "</td></tr>");
+                }
+                document.writeln("</table>");
+        
+
+
+        
+
+        /*
+            var balls=["basketball","baseball","tennis","volleyball",123];
+            document.write("join('-')="+balls.join("-")+"<br>");
+            document.write("reverse().join('=>')="+balls.reverse().join("=>")+"<br>");
+            document.write("sort()="+balls.sort()+"<br>");
+       */
+    </script>
+</body>
+</html>

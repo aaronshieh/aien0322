@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>05DateObject.html</title>
+
+</head>
+<body>
+
+    <script>
+        //建立日期物件語法 1
+        var d = new Date();
+        document.write(d+"<br>");
+        //建立日期物件語法 3
+        d = new Date("1985/06/26")
+        document.write(d+"<br>");
+        //建立日期物件語法 4
+        d = new Date("1988/10/06 1:00:00 AM")
+        document.write(d+"<br>");
+
+        d = new Date();
+        var theYear = d.getFullYear() - 1911;
+        var theMonth = d.getMonth() + 1;
+        var theDate = d.getDate();
+        //document.write(d);
+        document.write("民國" + theYear + "年" + theMonth + "月" + theDate + "日" + "<br>");
+
+        //================
+        //昨天=今天 - 1天
+        //昨天毫秒數=今天毫秒數 - 1天毫秒數
+        //昨天毫秒數=new Date().getTime() - 24 * 60 * 60 * 1000
+        //昨天=new Date(昨天毫秒數)
+        //================
+        //建立日期物件語法 2
+        var millis_per_day = 24*60*60*1000;
+        var yesterday = new Date(new Date().getTime() - millis_per_day);
+        alert("昨天此時是： " + yesterday);
+
+        yesterday = new Date(new Date().getTime() - 2*millis_per_day);
+        alert("前天此時是： " + yesterday);
+    </script>
+</body>
+</html>

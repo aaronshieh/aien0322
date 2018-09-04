@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homework02</title>
+    <link rel='stylesheet' href='Styles/hw02.css'>
+    <script>
+        
+    </script>
+
+</head>
+<body>
+<div>
+<form>
+    <fieldset>
+        <legend>Form Check</legend>
+        <div class='st1'>
+            <label for='name'>姓名:</label>
+            <input type="text" id='nameid' placeholder='請輸入中文姓名'>
+            <span id='namesp'></span>
+            <p>(不可空白,至少兩個字且必須為中文字)</p>
+        </div>
+        <hr>
+        <div class='st1'> 
+            <label for="pwd">密碼:</label>
+            <input type='password' id='pwdid' placeholder="請輸入密碼">
+            <span id='pwdsp'></span>
+            <p>(不可空白,不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*])</p>
+        </div>
+        <hr>
+        <div class='st1'>
+            <label for="pwd">日期:</label>
+            <input type='text' id='dateid'>
+            <span id='datesp'></span>
+            <p>(格式：西元年/月/日 ex:2000/2/29)</p>
+        </div>
+        <hr>
+        <div class='sub'>
+            <input type='submit' value="輸出">
+            <input type='reset' value='清除'>
+        </div>
+    </fieldset>
+</form>
+</div>
+
+<script>
+   
+    document.getElementById('nameid').addEventListener('blur',checkname)
+    document.getElementById('pwdid').addEventListener('blur',checkpwd)
+    document.getElementById('dateid').addEventListener('blur',checkdate)
+
+    function checkname(){
+        name = this.value
+        if (name=='') document.getElementById('namesp').innerHTML="<img src='Images/error.png'>不可空白"
+        else if (name.length<2) document.getElementById('namesp').innerHTML="<img src='Images/error.png'>至少兩個字"
+        else {
+            var namel = []
+            for (i=0;i<name.length;i++){
+                namel[i] = name.charCodeAt(i)
+                document.getElementById('namesp').innerHTML=namel[i]
+                if (namel[i] < 0x4E00 || namel[i] > 0x9FA5) {
+                    document.getElementById('namesp').innerHTML="<img src='Images/error.png'>請輸入中文"
+                    break
+                }
+                document.getElementById('namesp').innerHTML="<img src='Images/correct.png'>"
+            }
+            
+        }
+        
+    }
+
+    function checkpwd(){
+        var thePwd = this.value;
+        var pwdLen = thePwd.length
+        var flag1=false ,flag2=false ,flag3=false
+        //判斷元素值是否為空白，密碼長度是否大於6
+        if (thePwd == '') document.getElementById('pwdsp').innerHTML="<img src='Images/error.png'>不可留白"
+        else if (pwdLen >= 6){
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            thePwd = thePwd.toUpperCase()
+            for (i=0;i<pwdLen;i++){
+                var pwdChar = thePwd.charAt(i)
+                if (pwdChar >='A' && pwdChar <= 'Z') flag1 = true
+                else if (pwdChar >=0 && pwdChar <=9) flag2 = true
+                else if (checksym(pwdChar)) flag3 = true
+
+                if (flag1 && flag2 && flag3) break;
+            }
+            if (flag1 && flag2 && flag3) document.getElementById('pwdsp').innerHTML="<img src='Images/correct.png'>"
+            else document.getElementById('pwdsp').innerHTML="<img src='Images/error.png'> 請包含字母、數字、特殊符號"
+        }
+        else document.getElementById('pwdsp').innerHTML="<img src='Images/error.png'>至少6個字元"
+    
+    }
+
+    function checksym(char){
+        var sym = '!@#$%^&*'
+        for (i=0;i<sym.length;i++){
+            if (char == sym.charAt(i)) return true
+        }
+        return false
+    }
+
+    function checkdate(){
+        var ndate = new Date(this.value)
+        var datel = this.value.split('/')
+        var samed = false
+        if (ndate.getFullYear()==datel[0] && ndate.getMonth()+1==datel[1] && ndate.getDate()==datel[2]) samed = true
+        if (ndate != 'Invalid Date' && samed) document.getElementById('datesp').innerHTML="<img src='Images/correct.png'>";
+        else document.getElementById('datesp').innerHTML="<img src='Images/error.png'>格式錯誤";
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>04for.html</title>
+    <style>
+        table{
+            border:2px solid blue;
+            width: 800px;
+            border-collapse: collapse;
+        }
+        table td{
+            border:1px solid red;
+            text-align: center;
+            width:12.5%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+         <table>
+            <script>
+            for(i=1;i<10;i++)
+            {
+                document.write("<tr>");
+                for(j=2;j<10;j++)
+                {
+                document.write("<td>"+j+"*"+i+"="+i*j+"</td>");
+                                    }
+                document.write("<tr>");
+            }
+            </script>
+    </table>
+    
+    <table>
+        <tr>
+            <td>
+                <script>
+                for (i=2;i<3;i++){
+                        for (k=1;k<10;k++){
+                            document.write(i+"*"+k+"="+i*k+"<br>")
+                        }
+                    }
+                </script>
+            </td>
+            <td>
+                <script>
+                for (i=3;i<4;i++){
+                        for (k=1;k<10;k++){
+                            document.write(i+"*"+k+"="+i*k+"<br>")
+                        }
+                    }
+                </script>                
+            </td>
+            <td>
+                <script>
+                            for (i=4;i<5;i++){
+                                    for (k=1;k<10;k++){
+                                        document.write(i+"*"+k+"="+i*k+"<br>")
+                                    }
+                                }
+                </script>
+            </td>
+            <td>
+                    <script>
+                            for (i=5;i<6;i++){
+                                    for (k=1;k<10;k++){
+                                        document.write(i+"*"+k+"="+i*k+"<br>")
+                                    }
+                                }
+                </script>
+            </td>
+            <td>
+                    <script>
+                            for (i=6;i<7;i++){
+                                    for (k=1;k<10;k++){
+                                        document.write(i+"*"+k+"="+i*k+"<br>")
+                                    }
+                                }
+                </script>
+            </td>
+            <td>
+                    <script>
+                            for (i=7;i<8;i++){
+                                    for (k=1;k<10;k++){
+                                        document.write(i+"*"+k+"="+i*k+"<br>")
+                                    }
+                                }
+                </script>
+            </td>
+            <td>                <script>
+                    for (i=8;i<9;i++){
+                            for (k=1;k<10;k++){
+                                document.write(i+"*"+k+"="+i*k+"<br>")
+                            }
+                        }
+        </script></td>
+            <td>                <script>
+                    for (i=9;i<10;i++){
+                            for (k=1;k<10;k++){
+                                document.write(i+"*"+k+"="+i*k+"<br>")
+                            }
+                        }
+        </script></td>
+        </tr>
+    </table>
+
+</body>
+</html>

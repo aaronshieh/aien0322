@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form-check</title>
+    <style>
+        img{width:20px}
+    </style>
+    
+</head>
+<body>
+    <div>
+        <label for="account">姓名:</label>
+        <input type="text" id="idname" name="ntext" autofocus autocomplete="off" size="10">
+        <span id="idsp"></span>
+        <p>(不可空白,最少兩個字且為中文字)</p>
+    </div> 
+    <script>
+    document.getElementById("idname").addEventListener("blur",chkaccount);
+    function chkaccount(){
+        //取得元素值
+        var thenat=document.getElementById("idname").value;
+        var thenatlen=thenat.length;
+        var flag1=false;
+        //判斷元素值是否為空白，姓名長度是否大於2個字且為中文字
+        if(thenat=="")
+            document.getElementById("idsp").innerHTML=
+            "<img src='Images/incorrect.png'>you must enter";
+            
+        else if(thenatlen>=2) {
+                for(var i=0;i<thenatlen;i++){
+                    var natchr=thenat.charCodeAt(i);
+                      if(natchr >= 0x4E00 && natchr <= 0x9FFF) 
+                          flag1=true;
+                      else
+                          flag1=false;
+                }
+            if(flag1)
+            document.getElementById("idsp").innerHTML=
+            "<img src='Images/correct.jpg'>正確";
+            
+            else
+            document.getElementById("idsp").innerHTML=
+            "<img src='Images/incorrect.png'>非中文字元";
+            
+          }
+        else
+            document.getElementById("idsp").innerHTML=
+            "<img src='Images/incorrect.png'>name length must be greater than 2 digits";
+    }
+    </script>        
+            
+  
+    <div>   
+        <label for="Password">密碼:</label>
+        <input type="text" id="idPwd" size="6"/>   
+        <span id="chkPassword"></span>
+        <p>(不可空白,不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元[[!@#$%^&*]])</p>
+    </div>
+    
+    <script>
+        document.getElementById("idPwd").addEventListener("blur",chkPassword);
+        function chkPassword() {  
+                //取得元素值
+                var thePwd=document.getElementById("idPwd").value;
+                var thePwdLen=thePwd.length;
+                var flag1=false,flag2=false;flag3=false
+                re =/^.+@.+\..{2,3}$/;
+                //判斷元素值是否為空白，密碼長度是否大於6
+                if(thePwd=="")
+                    document.getElementById("chkPassword").innerHTML=
+                    "<img src='Images/incorrect.png'>you must enter";
+                else if(thePwdLen>=6) {
+                //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+                    //alert(">=6");
+                    for(var i=0;i<thePwdLen;i++){
+                         var PwdChr=thePwd.charAt(i).toUpperCase();
+                         //alert(PwdChr);
+                         if (PwdChr>="A" && PwdChr<="Z")
+                             flag1=true;
+                         else if(PwdChr>="0" && PwdChr<="9")
+                             flag2=true;
+                         else if(re.test(thePwd))
+                             flag3=true
+                         if (flag1&&flag2&&flag3) 
+                            break;
+
+                        }
+                         if(flag1 && flag2 && flag3) 
+                         document.getElementById("chkPassword").innerHTML="<img src='Images/correct.jpg'>"; 
+                         
+                         else
+                         document.getElementById("chkPassword").innerHTML="<img src='Images/incorrect.png'>";    
+                         
+                    }
+                else
+                    document.getElementById("chkPassword").innerHTML="The password length must be greater than 6";
+        }
+        
+    </script>
+
+    <div>
+        <label for="Date">日期:</label>
+        <input type="text" id="iddate" name="date"/>
+        <span id="chkDate"></span><br/><p>(格式：西元年/月/日 ex:2000/2/29)</p>
+    </div>
+    <script>
+        document.getElementById("iddate").addEventListener("blur",chkDate)
+        function chkDate(){
+            var theDate=document.getElementById("iddate").value;
+            var d=new Date(theDate);
+            var theYear = d.getFullYear() - 1911;
+            var strDate=theDate.split("/");
+            var theMonth=d.getMonth()+1;
+            {
+            if(d=="Invalid Date") 
+                document.getElementById("chkDate").innerHTML=
+                "<img src='Images/incorrect.png'>日期輸入錯誤或空白";
+            else if(theMonth!=strDate[1])
+                document.getElementById("chkDate").innerHTML=
+                "<img src='Images/incorrect.png'>日期輸入錯誤或空白";
+            else  
+                document.getElementById("chkDate").innerHTML=
+                "<img src='Images/correct.jpg'>正確";
+                }
+        }
+
+
+    </script>
+     <div>
+     <!-- <p><input type="reset" id="btnreset" value="Reset"/>
+        <input type="submit" id="btnsubmit" value="Submit"/></p>  -->
+    </div>  
+    <script>
+        
+        // window.addEventListener("Reset",function ())
+        // window.addEventListener("Submit",function ())
+    </script>   
+
+     
+</body>
+</html>

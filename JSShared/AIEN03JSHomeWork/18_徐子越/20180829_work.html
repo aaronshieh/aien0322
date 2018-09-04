@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Format-Checking-v2.0</title>
+    <style>
+        body {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color:#ffffff;
+            font-size: 1.2em;
+            
+        }
+        fieldset {
+            width:500px;
+            margin:auto;
+            border:0.5px solid #ffffff;
+            border-radius:15px;
+            background: -webkit-linear-gradient(top,black,rgb(84, 144, 255))
+            
+        }
+        legend {
+            margin: auto;
+            line-height: 1.5em;
+            border:3px solid black; 
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #000000
+        }
+        .st1 {
+            width:450px;
+            border-bottom:1px solid #f0f0f0;
+            margin:30px;
+            padding-bottom:30px;
+        }
+        .sub {
+            width:450px;
+            margin:20px;
+            text-align:center;
+        }
+        .t1 {
+            width:50px;
+            float:left;
+            text-align:right;
+            padding-right:3px;
+        }
+
+        .h1 {
+            color: rgb(213, 236, 202);
+            background-color: rgb(206, 235, 230);
+            height: 0.3px;
+        }
+        img {
+            width:15px;
+        }
+        input {
+            border: 2px solid white;
+            border-radius: 10px;color:#008cff;
+            font-size: 1em;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+        }
+        input:hover {
+            background-color:rgb(255, 255, 255);
+        }
+        #send {
+            width:150px;
+            background-color:rgb(84, 144, 255);
+            color: #ffffff;
+            border: 2px solid white;
+        }
+        #send:hover {
+            background-color:rgb(255, 255, 255);
+            color:rgb(84, 144, 255);
+        }
+        #clearall {
+            width:150px;
+            background-color:rgb(84, 144, 255);
+            color: #ffffff;
+            border: 2px solid white;
+        }
+        #clearall:hover {
+            background-color:rgb(255, 255, 255);
+            color:rgb(84, 144, 255);
+        }
+    </style>
+</head>
+
+<body>
+    
+    <form action="#" method="get" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Format-Checking-v2.0</legend>
+            <div class="st1">
+                <label class="t1" for="natext">name:</label>
+                <input type="text" id="idname" name="natext" onblur="chkname()" autocomplete="off" autofocus size="10">
+                <span id="idsp1"></span><br/> 
+                <script>
+                document.getElementById("idname").addEventListener("blur",chkname);    
+                function chkname() {
+                    //取得元素值
+                    var thenat=document.getElementById("idname").value;
+                    var thenatlen=thenat.length;
+                    var flagn=1;
+                    //判斷元素值是否為空白，字數是否大於2
+                    if(thenat=="")
+                        document.getElementById("idsp1").innerHTML=
+                        "<img src='Images/incorrect.png'>Cannot be empty!";
+                    else if(thenatlen>=2) {
+                        //如果字數大於2，
+                        for(var i=0;i<thenatlen;i++){
+                            var thenchr=thenat.charCodeAt(i);
+                            if(thenchr < 0x4E00 || thenchr > 0x9FA5)
+                                flagn=flagn*0; 
+                            else
+                                flagn=flagn*1;
+                        }
+                        switch (flagn){
+                            case 0:document.getElementById("idsp1").innerHTML=
+                                "<img src='Images/incorrect.png'>Chinese characters only.";
+                                break;
+                            case 1:document.getElementById("idsp1").innerHTML=
+                                "<img src='Images/correct.png'>Valid.";
+                                break;
+                        }
+                    }else{
+                        document.getElementById("idsp1").innerHTML=
+                        "<img src='Images/incorrect.png'>Must contain at least 2 characters!";
+                    }
+                }
+                </script>
+            </div>
+            
+            <div class="st1">
+                <label class="t1" for="pwd">pwd:</label>
+                <input type="password" id="idPwd" name="pwd" onblur="chkPassword()" maxlength="10">
+                <span id="idsp2"></span><br/> 
+                <script>
+                    document.getElementById("idPwd").addEventListener("blur",chkPassword);
+                    function chkPassword() {
+                        //取得元素值
+                        var thePwd=document.getElementById("idPwd").value;
+                        var thePwdLen=thePwd.length;
+                        var flag1=false,flag2=false;
+                        //判斷元素值是否為空白，密碼長度是否大於6
+                        if(thePwd==""){
+                        document.getElementById("idsp2").innerHTML=
+                        "<img src='Images/incorrect.png'>Cannot be empty!";
+                        }
+                        else if(thePwdLen>=6) {
+                            //如果長度大於6，判斷是否包含字母、數字、特殊符號
+                            for(var i=0;i<thePwdLen;i++){
+                                var PwdChr=thePwd.charAt(i).toUpperCase();
+                                if(PwdChr>="A" && PwdChr<="Z")
+                                    flag1=true;
+                                else if (PwdChr>="0" && PwdChr<="9")
+                                    flag2=true;
+                                if(flag1 && flag2)
+                                    break;
+                            }
+                            // re = /[!@#$%^&]/;
+                            // if(re.test(thePwd))
+                            //     flag3=true;
+                            // else
+                            //     flag3=false;
+                            if(flag1 && flag2)
+                                document.getElementById("idsp2").innerHTML=
+                                "<img src='Images/correct.png'>Correct";
+                            // else
+                            //     document.getElementById("idsp2").innerHTML=
+                            //     "<img src='Images/incorrect.png'>Must include a special character. eg:[!@#$%^&*]";
+                            }
+                            else
+                                document.getElementById("idsp2").innerHTML=
+                                "<img src='Images/incorrect.png'>Must contain at least 6 characters!";
+                    }   
+                </script>
+            </div>
+            
+            <div class="st1">
+                <label for="dtext" class="t1">date:</label>
+                <input type="text" name="dtext" id="iddate" onblur="chkdate()">
+                <span id="idsp3"></span><br/> 
+                <script>
+                    document.getElementById("iddate").addEventListener("blur",chkdate);
+                    function chkdate() {
+                        //取得元素值
+                        var thedat=document.getElementById("iddate").value;
+                        var thedate=new Date(thedat);
+                        var strdat=thedat.split("/");
+                        var theMonth = thedate.getMonth() + 1;
+                        // alert(strdat[1]);
+                        // alert(theMonth);
+                        if(thedate=="Invalid Date")                            document.getElementById("idsp3").innerHTML=
+                            "<img src='Images/incorrect.png'>Invalid format.";
+                        else if(theMonth!=strdat[1])
+                                document.getElementById("idsp3").innerHTML=
+                                "<img src='Images/incorrect.png'>Invalid format.";
+                        else  
+                            document.getElementById("idsp3").innerHTML=
+                            "<img src='Images/correct.png'>Correct.";
+                    }
+                        // }   
+                </script>
+            </div>
+            
+            <div class="sub">
+                <input type="submit" value="Send" id="send">
+                <input type="reset" value="Clear all" id="clearall">
+            </div>
+        </fieldset>
+
+    </form>   
+</body>
+</html>

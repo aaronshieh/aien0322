@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>亮鈴鐺</title>
+    <meta charset="utf-8" />
+    <style>
+        .s {
+            -webkit-filter: grayscale(1);
+            /*沒有任何色彩的黑白影像*/
+        }
+
+        .n {
+            -webkit-filter: grayscale(0);
+            /*顏色不變*/
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content">
+
+        <article>
+            <!-- 每頁不同的內容從這裡開始 -->
+            <img id="img1" src="images/star.png" class="s" />
+            <img id="img2" src="images/star.png" class="s" />
+            <img id="img3" src="images/star.png" class="s" />
+            <img id="img4" src="images/star.png" class="s" />
+            <img id="img5" src="images/star.png" class="s" />
+            <div id="iddiv"></div>
+
+            <!-- 每頁不同的內容到這裡結束 -->
+        </article>
+    </div>
+
+    <script src="script/hw03_star.js"></script>
+</body>

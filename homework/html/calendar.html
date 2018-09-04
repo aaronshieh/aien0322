@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="../js/calendar.js"></script>
+    <style>
+        body {
+            color: white;
+            text-shadow: 1px 1px 1px black;
+        }
+        div.content {
+            background: -webkit-linear-gradient(#DDD,rgb(88, 169, 255));
+            border-radius: 10px;
+            padding:20px;
+            height:200px;
+            width:50%;
+            margin:50px auto;
+            text-align: center;
+        }
+        select, label {
+            background-color:rgba(0,0,0,0);
+            color: black;
+            margin: 20px 20px;
+            font-size: 30px;
+            border:0;
+            padding: 5px;
+            outline: none;
+        }
+        label {
+            font-weight: bold;
+            margin-left:0;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-div">
+            <nav id="nav">
+                <a href="multiplicationtable.html">九九乘法表</a>
+                <a href="formcheck.html">表格驗證</a>
+                <a href="rating.html">評分</a>
+                <a href="carousel.html">圖形連播</a>
+                <a href="calendar.html">日曆</a>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+        <select id="year"></select><label for="year">年</label>
+        <select id="month"></select><label for="month">月</label>
+        <select id="day"></select><label for="day">日</label>
+        <h1 id="info"></h1>
+    </div>
+</body>
+</html>

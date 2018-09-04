@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>01OperatorPrecedence.html</title>  
+</head>
+<body>
+
+    <script>
+        //++ 遞增 --遞減
+        var a=1;
+        a++;        
+        document.write("a="+a+"<br>");  //2
+        a=1;
+        ++a;        
+        document.write("a="+a+"<br>");  //2
+        a=1;
+        a=a+1;        
+        document.write("a="+a+"<br>");  //2
+        
+        a=1;
+        var b=10*++a;
+        document.write("b="+b+"<br>");
+        document.write("a="+a+"<br>");  //2
+
+        a=1;
+        var b=10*a++;
+        document.write("b="+b+"<br>");
+        document.write("a="+a+"<br>");  //2
+
+        //三元運算子
+        //condition ? true :false
+        var x=-5;
+        var y=x>0?x:-1;
+        
+        // if(x>0)
+        //     y=x;
+        // else
+        //     y=-1;
+        document.write("y="+y+"<br>");
+    </script>
+</body>
+</html>

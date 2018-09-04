@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>04for.html</title>
+    <style>
+        table {
+            width:400px;
+            border:3px dashed blue;
+            border-collapse:collapse;
+            font-size:24px;
+            background-color:darkgray
+        }
+        td,th {
+            border:1px solid red;
+            padding:4px;
+            text-align:center;
+            vertical-align:middle;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+    <script>
+        for(x = 2; x < 10; x++)
+            {   
+                document.write("<tr>")
+                for(y = 1; y < 10; y++)
+                {        
+                    document.write
+                    ("<td>"+ x + "*" + y + "=" + x * y + "</td>")
+                }
+                document.write("</tr>")
+            }
+                
+    </script>
+    </table>
+</body>
+</html>

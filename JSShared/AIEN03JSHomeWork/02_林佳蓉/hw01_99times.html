@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>04for.html</title>
+    <style>
+        table td{
+            border: 1px solid green;
+            background-color:lightcyan;
+            font-family: "微軟正黑體";
+            
+        }
+        table{
+            border-collapse: collapse;  
+        }
+    </style>
+
+</head>
+<body>
+    <script>
+        var str ="<table><tr>" ;
+        for (var i=2;i<=9;i++)
+        {
+            str += "<td>";
+            for(var j=1;j<=9;j++)
+                str +="" + i + "*" + j + "="+ i*j + "<br>";
+    
+            str += "</td>";
+            
+            if(i == 9)
+                str += "</tr></table>";
+         
+        }
+
+        document.write(str);
+        
+    </script>
+</body>
+</html>

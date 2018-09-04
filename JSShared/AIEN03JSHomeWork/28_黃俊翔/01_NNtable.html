@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">   
+    <title>Document</title>
+    <style>
+        #table1{border: 3px solid #000000;
+                background-color:bisque;
+                font-family:arial;
+               }
+        #td1{
+              width:100px;
+              border:2px dotted red;
+              text-align:center;
+             }
+    </style>
+</head>
+<body>
+    <script>
+        document.write("<table id='table1'><tr>");
+        for(i=1; i<=9; i++)
+            {
+             document.write("<td id='td1'>");
+            for(j=1; j<=9; j++)
+            {
+            // document.write("<td>");
+            document.write(i+"*"+j+"="+i*j+"<br>");
+            // document.write("</td>");
+            }
+            document.write("</td>");
+            }
+        document.write("</tr></table>");
+    </script>
+    
+</body>
+</html>

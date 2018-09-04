@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework2</title>
+    <style>
+        
+        .div1{
+            width: 50%;
+            margin: auto;
+            background-color: skyblue;
+    }
+    input{
+        background-color: black;
+        color: white;
+    }
+    
+    </style>
+</head>
+<body>
+    <form action="#" method="GET" >
+        <div class="div1">
+
+        <fieldset>
+        <legend>form check <em>*</em></legend>
+            
+                <lable >姓名:</lable>
+                <input type="text" id="idName" >
+                <span id="idsp1"></span>
+                <p>1.不可為空白2.至少兩個字以上3.必須全部為中文字</p>
+                <hr>
+                <lable>密碼:</lable>
+                <input type="password" name="pwd" id="idPwd" >
+                <span id="idsp2"></span>
+                <p>1.不可空白2.至少六個字且包含英文字母、數字</p>
+                <hr>
+                <lable>日期:</lable>                
+                <input type="text" name="date"" id="idDate">
+                <span id="idsp3"></span>
+                <P>格式:西元年/月/日 eq:yyyy/MM/dd</P>
+            </fieldset>
+            </div>
+        
+    </form>
+    
+    
+    
+    <script>
+        document.getElementById("idName").addEventListener("blur", blur_name);
+        function blur_name() {
+            var Name = document.getElementById("idName").value
+            if (Name == "")
+            document.getElementById("idsp1").innerHTML="<img src='Lab06/Images/error.png'>不能空白";
+                 
+            else if (Name.length >= 2){                    
+                 for(var i = 0; i < Name.length; i++){
+                     if(Name.charCodeAt(i) < 0x4E00 || Name.charCodeAt(i) > 0x9FA5) {
+                        document.getElementById("idsp1").innerHTML="<img src='Lab06/Images/error.png'>只能輸入中文";
+                        break
+                        }
+                     else
+                        document.getElementById("idsp1").innerHTML="輸入正確";    
+                        
+                    }
+                }
+            else{
+                document.getElementById("idsp1").innerHTML="<img src='Lab06/Images/error.png'>不能少於兩個字";                  
+                }
+            }
+        document.getElementById("idPwd").addEventListener("blur", blur_pwd);
+        function blur_pwd(){
+            var pwd = document.getElementById("idPwd").value;
+            var flag1 = false, flag2 = false;
+            if (pwd == ""){
+                document.getElementById("idsp2").innerHTML="<img src='Lab06/Images/error.png'>不能空白";
+            }
+            else if(pwd.length >= 6 ){
+                for(var j = 0; j < pwd.length; j++){
+                    var pwdchr = pwd.charAt(j).toUpperCase();
+                    if (pwdchr >= "A" && pwdchr <= "Z")
+                        flag1 = true;
+                    else if (pwdchr >= "0" && pwdchr <= "9")
+                        flag2 = true;
+                    if (flag1 && flag2) break;
+                }
+                if (flag1 && flag2) 
+                    document.getElementById("idsp2").innerHTML="可以使用";
+                else
+                    document.getElementById("idsp2").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+                }
+            else
+            document.getElementById("idsp2").innerHTML="<img src='Lab06/Images/error.png'>必須大於六個字";
+            }
+        document.getElementById("idDate").addEventListener("blur", blur_date);
+        function blur_date(){
+            var strdate = document.getElementById("idDate").value.split('/')
+            if ( strdate[1] < 0 || strdate[1] > 12){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+            }
+            else if(strdate[1] == 4 || strdate[1] == 6 || strdate[1] == 9 || strdate[1] == 11 && strdate[2] > 30){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+            }
+            else if ((strdate[1] == 1 || strdate[1] == 3 || strdate[1] == 5 || strdate[1] == 7 || strdate[1] == 8 || strdate[1] == 10 || strdate[1] == 12) && strdate[2] > 31){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+            }
+            else if (( strdate[0] % 4 ==0 && strdate[0] %100 != 0 ) || ( strdate[0] % 400 == 0 ) && strdate[1] == 2 && strdate[2] > 29 ){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+            }
+            else if (( strdate[0] % 4 !=0 || strdate[0] %100 == 0 ) && ( strdate[0] % 400 != 0 ) && strdate[1] == 2 && strdate[2] > 28 ){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>輸入錯誤";
+            }
+            else if ( strdate == ""){
+                document.getElementById("idsp3").innerHTML="<img src='Lab06/Images/error.png'>不能空白";
+            }
+            else{
+                document.getElementById("idsp3").innerHTML="正確";
+            }
+        
+        
+        
+        
+        }
+    
+
+    </script>
+
+
+
+</body>
+</html>

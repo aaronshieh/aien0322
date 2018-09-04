@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>02dragFile.html</title>
+</head>
+<body>
+    <!--<textarea cols="60" rows="20" id="show"  ondragover="dragoverHandler(event)" ondrop="dropHandler(event)"></textarea>-->
+    <textarea cols="60" rows="20" id="show"></textarea>
+
+    <script>
+        document.getElementById("show").addEventListener("dragover", dragoverHandler);
+        document.getElementById("show").addEventListener("drop", dropHandler);
+
+        function dragoverHandler(e) {
+            e.preventDefault();
+        }
+
+        function dropHandler(e) {
+            e.preventDefault();
+            //取得使用者在檔案選擇標籤中選取檔案
+            var files = e.dataTransfer.files;
+
+            //多個檔案，使用for loop
+            for(i=0;i<files.length;i++) {
+                //alert(files[i].name + "," + files[i].type + "," + files[i].size + "," + files[i].slice(0,10));
+                var file = files[i];
+                
+                //1. 建立FileReader物件
+                var reader = new FileReader();
+
+                //3.onload資料讀取成功完成時觸發
+                
+                reader.addEventListener("load", loaded);
+                function loaded(e){
+                    //alert(e.target.result);
+                    //4. 將檔案內容暫存
+                    var content = e.target.result;
+
+                    //5. 將檔案內容放textarea標籤內
+                    document.getElementById("show").insertAdjacentHTML("beforeend", content);
+                }
+
+                //2. 使用readAsText方法，讀取檔案內容
+                reader.readAsText(file, "UTF-8");
+            }
+        }
+    </script>
+</body>
+</html>

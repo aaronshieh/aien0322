@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ZH-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rating Stars</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+        /* background-color:#b3d9d9; */
+    }
+    div{
+        /* background-color:#dedebe; */
+        margin-top:10%
+    }
+    table{
+        /* background-color: #ebd6d6; */
+        margin:auto;
+        border-top:2px solid #e1e100;
+        border-bottom:2px solid #e1e100
+    }
+    th{
+        /* background-color: #f9f900; */
+        height:2em;
+    }
+    tr{
+        background-color:white;
+        border:none;
+    }
+    td{
+        /* background-color:aquamarine; */
+        column-width:8em;
+        height:8em;
+        border: 0px none black;
+    }
+    #idA1{
+        /* background-color:#e97e13; */
+        height:2em;
+        color:black;
+    }
+    </style>
+</head>
+<body>
+<div>
+    <table>
+        <th colspan="5"></th>
+        <tr id='idR1'>
+            <td id='idC1'><img id='idS1' src="star.gif"></td>
+            <td id='idC2'><img id='idS2' src="star.gif"></td>
+            <td id='idC3'><img id='idS3' src="star.gif"></td>
+            <td id='idC4'><img id='idS4' src="star.gif"></td>
+            <td id='idC5'><img id='idS5' src="star.gif"></td>
+        </tr>
+        <tr>
+            <td id='idA1' colspan='5'>請點擊星星打分數</td>
+        </tr>
+    </table>   
+</div>
+<script>
+var fDone=false;
+    function mouseOver(n) {
+        if (fDone) return
+        else{
+            for (i=1;i<(n+1);i++){
+            var s="idS".concat(i.toString());
+            console.log('s='+s);
+            document.getElementById(s).src = "chngstar.gif";
+            }
+            document.getElementById("idA1").textContent="打分中..."+n; 
+        }
+    };
+    function mouseOut(n) {
+        if (fDone) return
+        else{
+            for (i=1;i<(n+1);i++){
+            var s="idS".concat(i.toString());
+            console.log('s='+s);
+            document.getElementById(s).src = "star.gif";
+            }
+            document.getElementById('idA1').textContent="請以星星數打分"; 
+        }
+    };
+    function Click(n){
+        fDone=true;
+        document.getElementById('idA1').textContent="你給 "+n+" 顆星.........(duble click可重給分)";
+    };
+    function dblClick(n){
+        fDone=false;
+        document.getElementById('idA1').textContent="請點擊星星打分數";
+    };
+    // var n=5;
+    // var l=1;
+    // for (l=1;l<=n;l++){
+    //     var s="idS".concat(l.toString())
+    //     console.log('s to send='+s+'  l='+l);
+    //     document.getElementById(s).addEventListener("mouseover", function(){mouseOver(l)});
+    //     document.getElementById(s).addEventListener("mouseout", function(){mouseOut(l)});
+    // }
+    
+    document.getElementById("idS1").addEventListener('mouseover', function(){mouseOver(1)});
+    document.getElementById("idS1").addEventListener('mouseout', function(){mouseOut(1)});
+    document.getElementById("idS2").addEventListener('mouseover', function(){mouseOver(2)});
+    document.getElementById("idS2").addEventListener('mouseout', function(){mouseOut(2)});
+    document.getElementById("idS3").addEventListener('mouseover', function(){mouseOver(3)});
+    document.getElementById("idS3").addEventListener('mouseout', function(){mouseOut(3)});
+    document.getElementById("idS4").addEventListener('mouseover', function(){mouseOver(4)});
+    document.getElementById("idS4").addEventListener('mouseout', function(){mouseOut(4)});
+    document.getElementById("idS5").addEventListener('mouseover', function(){mouseOver(5)});
+    document.getElementById("idS5").addEventListener('mouseout', function(){mouseOut(5)});
+
+    document.getElementById('idR1').addEventListener('click', function(){Click(5)});
+    document.getElementById('idR1').addEventListener('dblclick', function(){dblClick(5)});
+</script>
+
+</body>
+</html>

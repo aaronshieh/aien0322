@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hw1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+        table,td {
+            border: 2px #005757 solid;
+            background-color: #00ffff;
+            border-collapse:collapse;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        document.write("<table><tr>")
+        for (i = 1; i < 10; i++) {
+            document.write("<td>")
+            for (j = 1; j < 10; j++) {
+                answer = i + "*" + j + "=" + j * i
+                document.write(answer + "<br>")
+            }
+            document.write("</td>")
+        }
+        document.write("</tr></table>")   
+    </script>
+</body>
+
+</html>

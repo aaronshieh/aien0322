@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../Styles/main.css" rel="stylesheet" />
+    <style>
+        .s {
+            -webkit-filter: grayscale(1); /*沒有任何色彩的黑白影像*/
+        }
+
+        .n {
+            -webkit-filter: grayscale(0); /*顏色不變*/
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+         </header>
+        <div id="split"></div>
+        <div id="content">
+            <article>
+                <!-- 每頁不同的內容從這裡開始 -->
+                <img id="img1" src="../images/star.jpg" class="s" />
+                <img id="img2" src="../images/star.jpg" class="s" />
+                <img id="img3" src="../images/star.jpg" class="s" />
+                <img id="img4" src="../images/star.jpg" class="s" />
+                <img id="img5" src="../images/star.jpg" class="s" />               
+                <div id="iddiv"></div>
+                <script>
+                    var imgs=document.querySelectorAll("img.s");
+                    var imgsLen=imgs.length;
+                    var flag=false;
+                    // alert(imgsLen);
+                    for(var i=0;i<imgsLen;i++){
+                        imgs[i].addEventListener("mouseover",mouseOver);
+                        imgs[i].addEventListener("mouseout",mouseOut);
+                        imgs[i].addEventListener("click",Click);
+                    }
+
+                    function mouseOver(){
+                        //alert(this.id);
+                        var starNo=this.id.substr(3);
+                        if(flag==false){
+                            for(var i=0;i<starNo;i++){
+                                imgs[i].className="n";
+                                document.getElementById("iddiv").innerHTML=starNo+"顆星星";            
+                            }
+                        }
+                    }
+                    function mouseOut(){
+                        var starNo=this.id.substr(3);
+                        if(flag==false){
+                            for(var i=0;i<starNo;i++){
+                                imgs[i].className="s";
+                                document.getElementById("iddiv").innerHTML=0+"顆星星";
+                            }
+                        }
+                    }       
+                    function Click(){
+                        flag=true;
+                    }
+                    
+                </script>
+                <!-- 每頁不同的內容到這裡結束 -->                
+            </article>             
+        </div>
+    </div>
+</body>
+</html>

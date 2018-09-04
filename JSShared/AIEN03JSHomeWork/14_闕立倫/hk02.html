@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title> 
+
+    <style>
+        fieldset{
+            border: 2px,blue,solid;
+            width: 250px;
+    }
+        form p{
+            font-size: 5px ;
+            color: rgba(66, 62, 56, 0.589);
+        }
+    </style>
+
+</head>
+<body>
+    <form>
+    <fieldset>
+        <legend>Form Check</legend>
+        <label for="name">姓名:</label>
+        <input type="text" value="闕立倫" id="name">
+        <span id="idnm"></span><br/> 
+        <hr>
+        密碼:<input type="password" id="idPwd" >
+        <span id="idsp"></span><br/> 
+        <br/>   
+        <p>(1.不可空白 2.至少六個字必須包含英文字,數字,特殊字母)</p>
+        <hr>
+        日期:<input type="text" id="datetime_1">
+        <p>(格式:西元年/月/日 yyyy/mm/dd)</p> 
+        <span id="idtm"></span><br/> 
+        <hr>     
+        <input type="submit" value="送出">
+        <input type="reset"> 
+    </fieldset>
+
+    </form>
+
+<script>
+       document.getElementById("datetime_1").addEventListener("blur",datetime);
+        function datetime(){
+            var e = document.getElementById("datetime_1").value.split('/');
+            var b = new Date(e[0],e[1] - 1,e[2]);
+            if (b!="Invalid Date" && g.getMonth()+1==e[1]) {
+                document.getElementById("idtm").innerHTML="成功";    
+            }
+            else{
+                document.getElementById("idtm").innerHTML="失敗" ;
+            }
+        };
+
+
+        document.getElementById("name").addEventListener("blur",name_01);
+        function name_01(){
+            var a =document.getElementById("name").value;
+            if(a==" "){
+                document.getElementById("idnm").innerHTML="不可空白";
+            }
+                 if(a.length>=2) {
+                     document.getElementById("idnm").innerHTML="至少2個中文";
+            }
+                for(var i = 0; i < a.length; i++) {
+                    if(a.charCodeAt(i) < 0x4E00 || a.charCodeAt(i) > 0x9FA5) 
+                    {
+                        document.getElementById("idnm").innerHTML="全中文";
+                    break }
+            }
+        }
+
+            
+
+
+
+    document.getElementById("idPwd").addEventListener("blur",chkPassword);
+    function chkPassword() {
+        var thePwd = document.getElementById("idPwd").value;
+        var thePwdLen = thePwd.length;
+        var flag1=false,flag2=false,flag3=false;
+        var  sss= "!@#$%^"
+        if (thePwd ==""){
+            document.getElementById("idsp").innerHTML="不可空白"
+        }
+        else if (thePwdLen<6){
+            document.getElementById("idsp").innerHTML="至少六個字必須包含英文字,數字,特殊字母"
+            for(i=0;i<thePwdLen;i++){
+                    var gg = thePwd.chart(i).toUpperCase()
+                        if(gg>"a" && gg<"z")
+                        var flag1=true
+                        
+                        else if (gg>"0" && gg<"9")
+                        var flag2=true
+                    
+                        else if (sss.indexOf(gg)>-1)
+                        var flag3=true  
+                        
+                        if (flag1 && flag2 && flag3)  {
+                            break;
+                        }
+                }
+                if(flag1 && flag2 && flag3){ 
+                  
+                    document.getElementById("idsp").innerHTML = "成功";
+
+                }else{
+
+                } 
+        }
+    };
+
+
+</script>
+
+</body>
+</html>

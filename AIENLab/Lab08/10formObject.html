@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>10formObject.html</title>
+</head>
+<body>
+    <form action="get.aspx" method="get">
+			name:<input type="text" id="txtId" name="txtName" value="abc" /><span id="idsp"></span><br/>
+			<input type="checkbox" name="hobby" checked="checked" value="reading"/>reading
+			<input type="checkbox" name="hobby" value="game"/>game
+			<input type="checkbox" name="hobby" value="sleep"/>sleep
+			<br/>
+            <input type="submit" value="送出" />	
+            <input id="idbutton" type="button" value="check" />
+            <input id="idreset" type="button" value="reset" />
+            <input id="idsubmit" type="button" value="submit" />
+	</form>
+
+    <script>       
+        document.getElementById("idbutton").addEventListener("click", checkf);//事件繫結
+        document.getElementById("idreset").addEventListener("click", resetf);
+        document.getElementById("idsubmit").addEventListener("click", submitf);
+
+        function checkf() {
+            //var name = document.getElementById("txtId").value; //best method: 
+            //alt. 1: var name = document.getElementsByName("txtName")[0].value;
+            //alt. 2: var name = document.forms[0].txtName.value;
+            //alt. 3: var name = document.forms[0].elements[0].value;
+            //alert(name);
+
+            //alert(document.forms.length); //1, since only 1 form
+            //alert(document.forms[0].elements.length); //8, since 8 form elements in forms[0]
+            
+            // for(i=0;i<document.forms[0].elements.length;i++) {
+            //     alert(document.forms[0].elements[i].tagName);   //INPUT * 8
+            // }
+            
+            // alerts all checked hobbies
+            var hobbies = document.getElementsByName("hobby");
+            for(i=0;i<hobbies.length;i++) {
+                if (hobbies[i].checked) 
+                    alert(hobbies[i].value);
+            }
+        }
+
+        function resetf() {
+            document.forms[0].reset();  //reset() sets form element values to default values
+        }
+
+        function submitf() {
+            if (document.getElementById("txtId").value == "")
+                document.getElementById("idsp").innerHTML = "you must enter";
+            else 
+                document.forms[0].submit();
+        }
+    </script>
+</body>
+</html>

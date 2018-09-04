@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border: 4px gray solid;
+            border-collapse: collapse;
+            background-color:skyblue;
+        }    
+        td{
+            border-right: 2px gray solid;
+            padding: 0.5em;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 26px;
+            color:forestgreen;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <script>
+                    for(a = 1; a < 10; a ++){
+                        document.write("<tr>");
+                        
+                        for(b = 2; b < 10; b++){
+                            document.write("<td>");
+                            document.write(b + "*" + a + "=" + a*b);
+                            document.write("</td>");
+                            
+                        }
+                    }
+        </script>
+    </table>
+    
+</body>
+</html>

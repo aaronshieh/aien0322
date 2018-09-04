@@ -1,0 +1,32 @@
+* {
+    padding:0;
+    margin:0;
+    font-family: 'Microsoft JhengHei';
+}
+form{
+    width:450px;
+    margin:20px auto;
+}
+fieldset {
+    border-radius:15px;
+    width:100%;
+    padding:15px;
+}
+div.st1{
+    padding-left: 10px;
+    padding-top:15px;
+    padding-bottom: 20px;
+}
+.sub{
+    width:100%;
+    text-align: center;
+    margin:15px auto;
+}
+label{
+    float:left;
+    width:50px;
+    text-align: right;
+}
+P{
+    margin-left: 50px;
+}

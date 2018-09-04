@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Check</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="../js/formcheck.js"></script>
+    <style>
+        .content {
+            margin: 50px auto;
+            /* width: 974px; */
+            width: 80%;
+            overflow: auto;
+            text-align: center;
+        }
+        img {
+            width: 15px;
+        }
+        input {
+            background-color: #EEE;
+            border: 0;
+            border-bottom: 1px solid #BBB;
+            padding: 5px;
+            outline: none;
+        }
+        input:focus {
+            border-bottom: 1px solid teal;
+        }
+        input.button {
+            background-color: rgb(0, 100, 100);
+            color: #CCC;
+            width:100px;
+            border:0;
+        }
+        input.button:hover {
+            background-color:teal;
+            color: white;
+        }
+        fieldset {
+            width: 900px;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid teal;
+            margin: 15px;
+            background-color:#EEE;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+        .formItem {
+            width: 700px;
+            margin: 20px auto;
+        }
+        label {
+            float: left;
+            margin-right: 10px;
+            text-align: right;
+            width: 100px;
+            color: teal;
+            font-weight: bold;
+        }
+        legend {
+            font-weight: bold;
+            color: teal;
+            font-size: 24px;
+        }
+        span {
+            font-size: 14px;
+        }
+        span .incorrect {
+            color: darkred;
+            font-style: italic;
+        }
+        span .correct {
+            color: teal;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-div">
+            <nav id="nav">
+                <a href="multiplicationtable.html">九九乘法表</a>
+                <a href="formcheck.html">表格驗證</a>
+                <a href="rating.html">評分</a>
+                <a href="carousel.html">圖形連播</a>
+                <a href="calendar.html">日曆</a>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+    <form action="#" method="get">
+        <fieldset>
+            <legend>表格驗證</legend>
+            <div class="formItem">
+                <label for="name1">姓名：</label>
+                <input type="text" id="name1" name="name" 
+                    autocomplete="off" required placeholder="請輸入姓名">
+                <span id="spName"></span>
+            </div>
+            <div class="formItem">
+                <label for="pwd1">密碼：</label>
+                <input type="password" id="pwd1" name="pwd" minlength="6" autocomplete="off" 
+                    required placeholder="請輸入密碼">
+                <span id="spPwd"></span>
+            </div>
+            <div class="formItem">
+                <label for="date1">日期：</label>
+                <input type="text" id="date1" name="date" autocomplete="off" required 
+                    placeholder="ex:2000/2/29">
+                <span id="spDate"></span>
+            </div>
+            <div class="formItem" style="text-align: right;">
+                <input class="button" type="submit" value="submit">
+                <input class="button" type="reset" value="reset">
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</body>
+</html>

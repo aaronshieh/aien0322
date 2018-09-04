@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>評分</title>
+    <style>
+            .s {
+                -webkit-filter: grayscale(1); /*沒有任何色彩的黑白影像*/
+            }
+    
+            .n {
+                -webkit-filter: grayscale(0); /*顏色不變*/
+            }
+        </style>
+</head>
+<body>
+    <img id="img1" src="images/star.gif" class="s">
+    <img id="img2" src="images/star.gif" class="s">
+    <img id="img3" src="images/star.gif" class="s">
+    <img id="img4" src="images/star.gif" class="s">
+    <img id="img5" src="images/star.gif" class="s">
+    <div id="iddiv"></div>
+
+    <script>
+        var imgs = document.querySelectorAll("img.s");
+        var imgslen = imgs.length;
+        var flag = true;
+        for (var i=0;i<imgslen;i++){
+            imgs[i].addEventListener("mouseover",mouseOver);
+            imgs[i].addEventListener("mouseout",mouseOut);
+            imgs[i].addEventListener("click",Click);
+            imgs[i].addEventListener("dblclick",DBClick);
+            }
+        function mouseOver(){
+            if (flag){
+                var starno = this.id.substr(3);
+                for(var j=0;j<starno;j++){
+                imgs[j].className="n";
+                document.getElementById("iddiv").innerHTML=starno+"顆星星";
+                }}}
+
+        function mouseOut(){
+            if (flag){
+                var starno = this.id.substr(3);
+                for(var j=0;j<starno;j++){
+                imgs[j].className="s";
+                document.getElementById("iddiv").innerHTML=starno+"顆星星";
+                }}}
+
+        function Click(){
+            
+            // var starno = this.id.substr(3);
+            // for(var j=0;j<starno;j++){
+            //     imgs[j].className="n";
+            // }
+            // document.getElementById("iddiv").innerHTML=starno+"顆星星";
+            flag = false;
+        }
+        function DBClick(){
+            //  var starno = this.id.substr(3);
+            for(var j=0;j<6;j++){
+                  imgs[j].className="s";
+            
+            flag = true;}
+            }
+    </script>
+</body>
+</html>

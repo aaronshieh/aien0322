@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表單</title>
+    <style>
+        
+    * { 
+        margin:0;
+        padding:0;
+    }
+    article {
+        border:solid;
+        margin:0px 720px;
+        padding:10px 30px;
+        background-color:aquamarine;
+        border-radius:20px;
+        font-size:22px;
+    }
+    i {
+        font-size:70%;
+        color:red;
+    }
+    .st2 {
+        font-size:70%;
+        color:gray;
+        padding-bottom:20px;
+        padding-left:6px;
+    }
+    .st1 {
+        margin:10px;
+        text-align:center;
+    }
+    .st3 {
+        font-size:70%;
+        color:gray;
+        padding-left:6px;
+    }
+    .st4{
+        color:red;
+        font-size:70%;
+        padding-left:6px;
+        font-weight:bolder;
+        text-decoration:underline;
+    }
+    .st5{
+        color:red;
+        font-size:70%;
+        padding-left:6px;
+        font-weight:bolder;
+        text-decoration:underline;
+        padding-bottom:20px;
+    }
+
+    
+    </style>
+</head>
+<body>
+    <article>
+        <p>姓名<input type = "text" id = "idname" size="10" placeholder="請輸入密碼"><span id = "idsp2"></span></p>
+        <p class = "st3" id = "pid1">1不可空白</p>
+        <p class = "st3" id = "pid2">2兩個字以上</p>
+        <p class = "st2" id = "pid3">3皆為中文</p>
+        <p>密碼<input type = "password" id = "idpwd" size="10" placeholder="請輸入密碼"><span id = "idsp"></span></p>
+        <p class = "st2">(1不可空白 2至少6位 3須包含英文字母、數字、特殊字元)</p>
+        <p>日期<input type = "text" id = "iddate" size="10" placeholder="ex:2018/8/29"><span id = "idsp3"></span></p>
+        <p class = "st2">格式:西元年/月/日</p>
+    </article>
+    <p class = "st1"><input type="button" value="送出" onclick="chkPassword();">
+        <input type="button" id="reset" value="清除全部" onclick="chkPassword();"></p>
+
+<script>
+    document.createElement("article")
+    document.getElementById("idname").addEventListener("blur",function(){
+    thename = document.getElementById("idname").value
+    thenamelen = thename.length
+    flag4 = false
+    flag5 = false
+    flag6 = false
+    if(thenamelen < 2){
+        document.getElementById("pid2").className = "st4"
+    }
+    else{
+        document.getElementById("pid2").className = "st3"
+        flag4 = true
+    }
+    if(thenamelen > 0){
+        for(x = 0;x < thenamelen;x++){
+        namechr = thename.charAt(x)
+        if(namechr >= "\u2121" && namechr <= "\u6655"){
+            document.getElementById("pid3").className = "st2"
+            flag5 = true
+        }
+        else{
+            document.getElementById("pid3").className = "st5"
+        }
+        }
+    }
+    if(thename != ""){
+        document.getElementById("pid1").className = "st3"
+        flag6 = true
+    }
+    else{
+        document.getElementById("pid1").className = "st4"
+        
+    }
+    if(flag4 || flag5 || flag6){
+        document.getElementById("idsp2").innerHTML = "<img src='images/p2.png'>"
+    }
+    })
+    
+    document.getElementById("idpwd").addEventListener("blur",function(){
+    thepwd = document.getElementById("idpwd").value
+    thepwdlen = thepwd.length
+    spc = "!@#$%^&*"
+    flag1 = false
+    flag2 = false
+    flag3 = false  
+    if(thepwd == ""){
+        document.getElementById("idsp").innerHTML = "<img src='images/error.png'><i>不可空白</i>"
+    }
+    else if(thepwdlen >= 6) {
+        for(x = 0;x < thepwdlen;x++){
+            pwdchr = thepwd.charAt(x).toUpperCase()
+            if(pwdchr >= "A" && pwdchr <= "Z")
+                flag1 = true
+            else if(pwdchr>="0" && pwdchr<="9")
+                flag2 = true
+            else if(spc.indexOf(pwdchr) > -1)
+                flag3 = true
+                if(flag1 && flag2 && flag3)
+                    break
+        }
+        if(flag1 && flag2 && flag3)
+            document.getElementById("idsp").innerHTML = "<i>格式正確</i>"
+        else
+            document.getElementById("idsp").innerHTML = "<img src='images/error.png'><i>須包含英文字母、數字、特殊字元</i>"
+    }
+    else{
+        document.getElementById("idsp").innerHTML = "<img src='images/error.png'><i>至少6位</i>"
+    }
+    })
+    
+    document.getElementById("iddate").addEventListener("blur",function(){
+    thedate = document.getElementById("iddate").value
+    dax = document.getElementById("iddate").value.split('/');
+    day = new Date(dax[0],dax[1] - 1,dax[2]);
+    da = /^\d+\/\d+\/\d+/
+        if(da.test(thedate))
+            if(dax != "Invalid Date" && (day.getMonth() + 1) == dax[1]){
+                document.getElementById("idsp3").innerHTML = "<i>日期存在</i>"
+            }
+            else{
+                document.getElementById("idsp3").innerHTML = "<img src='images/error.png'><i>日期不存在</i>"
+            }
+        
+        else
+            document.getElementById("idsp3").innerHTML = "<img src='images/error.png'><i>格式不正確</i>"
+    })
+    
+    document.getElementById("reset").addEventListener("click",function() {
+    window.location.reload()
+    })
+        </script>
+    </body>
+    </html>

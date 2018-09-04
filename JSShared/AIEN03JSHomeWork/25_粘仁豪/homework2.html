@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HW2</title>
+    <style>
+        *{
+            margin:0 ;
+            padding:0;
+            background-color:white;
+        }
+        body
+        {
+            border:1px solid silver;
+            width:1000px;
+            margin:50px auto;
+            padding:40px;
+            background-color:khaki;
+        }
+        fieldset{
+            border-radius:20px;
+            font-size:30px;
+            margin:70px
+        }
+        .str1{
+            border:1px solid white;
+            padding:10px;
+            padding-top:50px;
+            margin:10px 20px 0px 20px;
+            font-size:25px;
+        }
+        .str2{
+            border:1px solid white;
+            padding:30px;
+            margin:30px;        
+            text-align:center
+        }
+        hr{
+            margin:0px 30px;
+        }
+        .in{
+            width:500px;
+            height:50px;
+        }
+        .in1{
+            width:70px;
+            height:40px;
+            font-size:20px;
+            margin-right:20px;
+        }
+        .in2{
+            width:70px;
+            height:40px;
+            font-size:20px;
+            margin-left:20px;
+        }
+        p{
+            color:forestgreen;
+            font-size:20px;
+            padding-top:20px;
+            font-weight:600;
+            margin:0px 63px;
+        }
+    </style>
+</head>
+<body>
+<fieldset>
+<legend>Form Check</legend>    
+    <div class=str1>
+    姓名:
+    <input type="text" id="idName" class=in>
+    <span id="spaninner1" style=color:red;font-weight:800></span><br/>
+    <p>(1.不可空白，2.至少兩個字以上，3.必須全部為中文字)</p> 
+    </div class=str1>
+    <hr>
+    <div class=str1>
+    密碼:
+    <input type="password" id="idPwd" size="6" class=in>
+    <span id="spaninner2" style=color:red;font-weight:800></span><br/>
+    <p>(1.不可空白，2.至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*])</p>  
+    </div>
+    <hr>
+    <div class=str1>
+    日期:
+    <input type="text" id="idDate" class=in>
+    <span id="spaninner3" style=color:red;font-weight:800></span><br/>
+    <p>格式：西元年/月/日 yyyy/MM/dd</p> 
+    </div>
+    <hr>
+    <div class=str2>
+        <input type="submit" value="送出" class=in1>
+        <input type="reset" value="清除" class=in2>    
+    </div>
+</fieldset>
+    <script>
+        document.getElementById("idName").addEventListener("blur", chkName)
+        document.getElementById("idPwd").addEventListener("blur", chkPassword)
+        document.getElementById("idDate").addEventListener("blur", chkDate)
+
+
+        function chkName() {
+            var theName = document.getElementById("idName").value;
+            var x = false
+            if (theName == "")
+                document.getElementById("spaninner1").innerHTML = "<img src='images/error.png'>請輸入姓名";
+            else {
+                for (var i = 0; i < theName.length; i++) {
+                    var theNamechr = theName.charCodeAt(i);
+                    if (theNamechr >= 0x4E00 && theNamechr <= 0x9FA5)
+                        x = true
+                    else {
+                        x = false
+                        break;
+                    }
+                }
+                if (x)
+                    document.getElementById("spaninner1").innerHTML = "<img src='images/correct.jpg'>正確";
+                else
+                    document.getElementById("spaninner1").innerHTML = "<img src='images/error.png'>請輸入中文";
+            }
+        }
+
+
+
+
+
+        function chkPassword() {
+            var thePwd = document.getElementById("idPwd").value;
+            var thePwdlen = thePwd.length;
+            var flag1 = false, flag2 = false, flag3 = false;
+            if (thePwd == "")
+                document.getElementById("spaninner2").innerHTML = "<img src='images/error.png'>請輸入密碼";
+            else if (thePwdlen >= 6) {
+                for (var i = 0; i < thePwdlen; i++) {
+                    var thePwdchr = thePwd.charAt(i).toUpperCase();
+                    if (thePwdchr >= "A" && thePwdchr <= "Z")
+                        flag1 = true;
+                    else if (thePwdchr >= "0" && thePwdchr <= "9")
+                        flag2 = true;
+                    else if (checksym(thePwdchr))
+                        flag3 = true;
+
+                    if (flag1 && flag2 && flag3) break;
+                }
+                if (flag1 && flag2 && flag3)
+                    document.getElementById("spaninner2").innerHTML = "<img src='images/correct.jpg'>正確";
+                else
+                    document.getElementById("spaninner2").innerHTML = "<img src='images/error.png'>格式錯誤"
+            }
+            else
+                document.getElementById("spaninner2").innerHTML = "<img src='images/error.png'>字數需大於或等於6個字元"
+        }
+
+        function checksym(chr) {
+            var arr = ["!", "@", "#", "$", "%", "^", "&", "*"]
+            var chr
+            for (var j = 0; j < arr.length; j++) {
+                if (chr == arr[j])
+                    return true
+            }
+            return false
+        }
+
+
+
+
+
+        function chkDate() {
+            var theDate = document.getElementById("idDate").value;
+            var DateAry = theDate.split("/");
+            var theDateAry = new Date(DateAry[0], DateAry[1] - 1, DateAry[2]);
+            var theYearVal = theDateAry.getYear();
+            var theMonthVal = theDateAry.getMonth() + 1;
+            var theDateVal = theDateAry.getDate();
+            console.info(typeof theDateVal + typeof DateAry[2])
+            if (theDateVal == parseInt(DateAry[2]))
+                document.getElementById("spaninner3").innerHTML = "<img src='images/correct.jpg'>正確";
+            else
+                document.getElementById("spaninner3").innerHTML = "<img src='images/error.png'>格式錯誤";
+        }
+
+    </script>
+</body>
+
+</html>

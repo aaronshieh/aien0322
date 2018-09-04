@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            border: 2px solid #0026ff;
+            background-color: #0ff;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid #0026ff;
+            color:fuchsia;
+        }
+        
+    </style>
+</head>
+<body>
+    <script>
+    document.write("<table>")
+        for(a=2;a<10;a++){
+            document.write("<tr>")
+            for(b=1;b<10;b++){
+                document.write("<td>"+a+"*"+b+"="+a*b+"</td>")
+            }
+            document.write("</tr>")
+        }
+
+    document.write("</table>")
+    </script>
+
+<script>
+        document.write("<table>","<tr>")
+            for(a=2;a<10;a++){
+                document.write("<td>")
+                for(b=1;b<10;b++){
+                    document.write(a+"*"+b+"="+a*b+"<br>")
+                }
+                document.write("</td>")
+            }
+    
+        document.write("</table>","<tr>")
+        </script>
+        
+</body>
+</html>

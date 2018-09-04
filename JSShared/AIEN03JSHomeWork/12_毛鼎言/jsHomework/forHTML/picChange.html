@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>圖片輪播</title>
+    <script src="../forJavaScript/picChange.js"></script>
+    <!-- <link rel="stylesheet" href="../forCSS/picChange.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body onload="init()">
+    
+    <div class="imgBlock">
+        <a href="http://www.google.com" id="link"> 
+            <img id="image" src="../forPics/blitzcrank.jpg" alt="blitz" width="800px" height="500px" title="點我看造型">
+        </a>    
+    </div>
+    <div class="buttonBlock"">
+        <input type="button" id="back"  value="上一張">
+        <input type="button" id="resume"  value="暫停／繼續">
+        <input type="button" id="forth"  value="下一張">
+    </div>
+</body>
+</html>

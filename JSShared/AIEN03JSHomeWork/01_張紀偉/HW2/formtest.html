@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表單練習</title>
+</head>
+<style>
+    .st1{   font-size: 25px;
+            
+            width:700px;
+            border-bottom:1px solid whitesmoke;
+            /* margin-bottom:20px; */
+            padding-bottom:10px;
+    }
+    .st2{
+        width:450px;
+            margin:20px;
+            text-align:center;
+    }
+    .st3{   
+            float:left;
+            text-align:right;
+            padding-right:10px;
+    }
+    em{color:red;}
+    .stt{background-color: burlywood;
+        margin: 0px 630px;
+        width: 700px;
+        border-radius: 20x;
+        -moz-border-radius:20px;
+        -webkit-border-radius:20px;
+        padding: 10px 10px 10px 10px;
+        padding-bottom:30px ;
+        margin-bottom: 20px
+    }
+    /* textarea {
+            resize:none;
+            } */
+    .b1{
+        float: auto;
+    }
+    .w{
+        color: gray;
+    }
+    .t{ font-size: 25px;
+        padding: 0px 10px 0px 0px;
+        color: blue
+    }
+    
+
+</style>
+
+<body>
+    <form action="#" method="GET">
+        <fieldset class="stt"><legend class="t">Form Check</legend>
+            <div class="st1">
+                <span class="t">姓名:</span><input class="t" type="str" id="idname" />
+                <span id="idsp1"></span><br/>
+                <span class="w">(1.不可空白，2.至少兩個字以上，3.必須全部為中文字)</span>
+                <script>
+                    document.getElementById("idname").addEventListener("blur",chkname);
+                    function chkname() {
+                        var thename = document.getElementById("idname").value;
+                        var re=new RegExp("^[\u4e00-\u9fa5 ]{2,3}$");        
+                        if (re.test(thename))
+                            document.getElementById("idsp1").innerHTML="<img src='Images/correct.png'>correct";
+                            
+                        else
+                            document.getElementById("idsp1").innerHTML="<img src='Images/error.png'>incorrect";
+                            
+                    }
+                    
+                </script>
+            </div>
+            <div class="st1">
+            <span class="t">密碼:</span><input class="t" type="password" id="idPwd" size="6"/>
+            <span id="idsp2"></span><br/>
+            <span class="w">(1.不可空白，2.至少6個字且須包含英文字母、數字、特殊字元)</span>   
+            <!-- <input class="b1"  type="button" value="check password" onclick="chkPassword();" /> -->
+        
+            <script>
+                document.getElementById("idPwd").addEventListener("blur",chkPassword);
+                function chkPassword() {
+                    //取得元素值
+                    var thePwd=document.getElementById("idPwd").value;
+                    var thePwdLen=thePwd.length;
+                    var flag1=false,flag2=false;
+                    //判斷元素值是否為空白，密碼長度是否大於6
+                    if(thePwd=="")
+                        document.getElementById("idsp2").innerHTML=
+                        "<img src='Images/error.png'>you must enter";
+                    else if(thePwdLen>=6) {
+                        //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+                        // alert(">=6");
+                        for(var i=0;i<thePwdLen;i++){
+                            var PwdChr=thePwd.charAt(i).toUpperCase();
+                            //alert(PwdChr);
+                            if(PwdChr>="A" && PwdChr<="Z")
+                                flag1=true;
+                            else if (PwdChr>="0" && PwdChr<="9")
+                                flag2=true;
+                            if(flag1 && flag2) break;
+                        }
+                        if(flag1 && flag2) 
+                            document.getElementById("idsp2").innerHTML="<img src='Images/correct.png'>correct";
+                        else
+                            document.getElementById("idsp2").innerHTML="<img src='Images/error.png'>incorrect";
+                    }
+                    else
+                        document.getElementById("idsp2").innerHTML="The password length must be greater than 6";
+                    } 
+            </script>
+            </div>
+            <!-- <div class="st1">
+                <label class="st3" for>密碼:</label><input type="password" name="pwd" maxlengh="8">
+            </div> -->
+            
+            <div class="st1">
+            <span class="t">日期:</span><input class="t" type="text" id="dateid" name="date" placeholder=" ex. 2018/08/29"  minlength="10" size="10">
+                <span id="datechk"></span><br/>
+                <span class="w">(格式:西元年/月/日 YYYY/MM/DD)</span>
+            <script>  
+                document.getElementById("dateid").addEventListener("blur",chkdate);
+                function chkdate(){
+                        var input = document.getElementById("dateid").value.split('/');
+                        var indate = new Date(input[0],input[1] - 1,input[2]);
+                        if(indate != "Invalid Date" && (indate.getMonth() + 1) == input[1]){
+                            document.getElementById("datechk").innerHTML = "<img src='Images/correct.png'>correct";
+                        } 
+                        else {
+                            document.getElementById("datechk").innerHTML = "<img src='Images/error.png'>incorrect";
+                        }
+                    }
+                    
+            </script>
+            </div>
+            <div class="st2">
+                <input type="submit" value="送出">
+                <input type="reset" value="清除">
+            </div>   
+
+
+            
+    </fieldset>
+    
+   
+   
+</body>
+</html>

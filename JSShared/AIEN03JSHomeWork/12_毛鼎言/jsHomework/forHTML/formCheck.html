@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <title>確認表單</title>
+    <script src="../forJavaScript/formCheck.js"></script>
+    <link rel="stylesheet" href="../forCSS/formCheck.css">
+</head>
+<body onload="init()">
+    <form method="GET" autocomplete="off">
+        <fieldset>
+        <legend>確認表單</legend>
+        <div>
+        <label for="name">姓名</label>
+        <input size="8px" type="text" id="name" name="name" placeholder="請輸入姓名">
+        <i id="svg"></i>
+        <span id="msgName"></span>
+        <p>(不可空白,至少兩個字且必須為中文字)</p>
+        </div>
+        <hr>
+        <div>
+        <label for="pwd">密碼</label>
+        <input size="12px" type="text" id="pwd" name="pwd" placeholder="請輸入密碼">
+        <span id="msgPwd"></span>
+        <p>(不可空白,不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元!@#$%^&*)</p>
+        </div>
+        <hr>
+        <div>
+        <label for="date">日期</label>
+        <input size="12px" type="text" id="date" name="date" placeholder="請輸入日期">
+        <span id="msgDate"></span>
+        <p>(格式：西元年/月/日 ex:2000/2/29)</p>
+        </div>
+        <hr>
+        <input type="submit" id="submit" value="送出">
+        <input type="reset" value="清除">
+
+    </fieldset>
+    </form>
+
+</body>
+</html>

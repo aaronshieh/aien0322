@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <title>一起來評分</title>
+</head>
+<body>
+    <img src="../forPics/chngstar.gif" id="0" class="star" alt="星星" width="100px" style="filter:grayscale(1)">
+    <img src="../forPics/chngstar.gif" id="1" class="star" alt="星星" width="100px" style="filter:grayscale(1)">
+    <img src="../forPics/chngstar.gif" id="2" class="star" alt="星星" width="100px" style="filter:grayscale(1)">
+    <img src="../forPics/chngstar.gif" id="3" class="star" alt="星星" width="100px" style="filter:grayscale(1)">
+    <img src="../forPics/chngstar.gif" id="4" class="star" alt="星星" style="filter:grayscale(1)">
+    <h6>按一次星星定住，再按一次放開</h6>
+    <script>
+        countStar = document.getElementsByClassName("star").length; //計算星星數量
+        flag = true;   //為了定住星星而設的指標
+        for(i=0;i<countStar;i++){
+            document.getElementsByTagName("img")[i].addEventListener("mouseover",brightStar);
+            document.getElementsByTagName("img")[i].addEventListener("mouseout",darkStar);
+            document.getElementsByTagName("img")[i].addEventListener("click",stopThere);
+        }
+        function brightStar(){
+            if(flag){
+                for(j=0;j<=this.id;j++)
+                    document.getElementById(j).style.filter = "grayscale(0)";
+            }         
+        }
+        function darkStar(){
+            if(flag){
+                for(k=this.id;k>=0;k--)
+                    this.style.filter = "grayscale(1)";
+            }
+        }
+        //按一次定住星星，再按一次放開
+        function stopThere(){
+            if(flag)
+                flag = false;
+            else{
+                for(m=this.id;m<countStar;m++)             
+                    document.getElementById(m).style.filter = "grayscale(1)";
+                flag = true;        
+            }    
+        }
+    </script>
+</body>
+</html>

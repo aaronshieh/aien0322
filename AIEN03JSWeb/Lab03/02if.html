@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02if.html</title>
+</head>
+<body>
+
+    <script>
+        // var a = 10, b = 20;
+
+        //使用window.prompt()方法，取得變數値
+        // var a=parseInt(window.prompt("please input a:","10"));
+        // var b=parseInt(window.prompt("please input b:"));
+        // if (a > b)
+        //     document.write("a > b");
+        // else
+        //     document.write("a&lt;b");
+
+        var age=parseInt(window.prompt("please input age:","10"));
+
+        if(age>=0 && age<=6  || age>=65)
+            document.write("free");
+        else if(age>6 && age<25)
+            document.write("student");
+        else if(age>25 && age<65)
+            document.write("full");
+
+
+        switch(age){
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:document.write("free");break;
+            case 7:
+        }
+    </script>
+</body>
+</html>

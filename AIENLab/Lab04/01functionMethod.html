@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>01functionMethod.html</title>
+</head>
+<body>
+
+    <script>
+        //==========定義函式==================
+        //方法一函式宣告，定義帶參數的函式
+        function fAdd1(a,b) {
+            return a+b;
+        }
+
+        //==========函式呼叫==================
+        //呼叫帶參數的函式
+        document.write("fAdd1(10,20) = " + fAdd1(10,20) + "<br>");
+        document.write("fAdd1(10,20,30) = " + fAdd1(10,20,30) + "<br>");
+        document.write("fAdd1(10) = " + fAdd1(10) + "<br>");
+
+
+        //==========定義函式==================
+        //方法二函式實字
+        var fAdd2 = function(a,b) {
+            return a+b;
+        }
+
+        document.write("fAdd2(20,30) = " + fAdd2(20,30) + "<br>");
+
+        //列印函式內容
+        document.write("fAdd2 = " + fAdd2 + "<br>");
+        document.write("fAdd1 = " + fAdd1 + "<br>");
+        fAdd2 = fAdd1;
+        document.write("fAdd2 = " + fAdd2 + "<br>");
+
+        //==========方法製作==================
+        //定義物件
+        var car = {brand:"BMW", "max speed":300};
+
+        //定義物件方法一(使用函式實字)
+        car.getParams = function() {
+            return this.brand + "," + this["max speed"];
+        }
+
+        //定義物件方法二(使用函式宣告)
+        function drive() {
+            return "DRIVING " + this.brand + " at " + this["max speed"];
+        }
+        car.drive = drive;
+
+        //方法呼叫
+        document.write(car.getParams() + "<br>");
+        document.write(car.drive() + "<br>");
+
+        if (window.alert)   //returns true if not undefined
+            alert("supported method");
+        else                //returns false if undefined
+            alert("unsupported method");
+
+    </script>
+</body>
+</html>

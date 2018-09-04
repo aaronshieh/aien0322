@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form check</title>
+    <style>
+    .str1{
+        width:500px;
+        margin:20px;
+        border-bottom:1px solid rgb(219, 218, 218);
+        padding-bottom:30px;
+    }
+    .t1{
+        width:100px;
+        float:left;
+        text-align:right; 
+        padding-right:3px;
+    }
+    fieldset{
+            width:600px;
+            margin:auto;
+            border:1px solid #acd6ff;
+            border-radius:15px;
+    }
+    .sub{
+        width:450px;
+        margin:20px;
+        text-align:center;
+    }
+    .t2 {
+        color:gray;
+        font-size:8px;
+        float:left;
+        text-align:right; 
+    }
+    img {
+         width:20px;
+    }
+    </style>
+</head>
+<body>
+    <form action="#" method="get" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Form Check</legend>
+        <div class="str1">
+            <label class="t1" for="account1">姓名:</label>
+            <input type="text" id="account1" name="account"  autofocus placeholder="your name" size="10">
+            <span id="idname"></span><br/>
+            <p class="t2">(1.不可空白,2.至少兩個字以上,3.必須全部為中文字)</p>
+        </div>
+        <div class="str1">
+            <label class="t1" for="password" size="6">密碼:</label>
+            <input type="password" id="idpwd" required placeholder="please enter password" name="pwd" minlength="6" maxlength="20">
+            <span id="idsp"></span><br/>            
+            <p class="t2">(1.不可空白,2.至少6個字且必須包含英文字母、數字特殊字元[!@#$%^&*])</p>
+        </div>
+        <div class="str1">
+            <label class="t1" for="">日期:</label>
+            <input type="text" id="date" placeholder="ex:2000/2/29" name="date1" size="30">
+            <span id="iddate"></span><br/>
+            <p class="t2">格式:西元年/月/日 yyyy/M/dd</p>
+        </div>
+        <div class="sub">
+            <input type="submit" value="送出">
+            <input type="reset" value="清除">
+        </div>
+        </fieldset>
+    </form>
+    <script>
+            //    checkname
+            document.getElementById("account1").addEventListener("blur",chkname);
+            function chkname() {
+                var Name = document.getElementById("account1").value;
+                var NameLen = Name.length;
+                var flag1 = false;
+                //判斷元素值是否為空白
+            if (Name == "")
+                document.getElementById("idname").innerHTML="<img src='images/error.png'> you must enter";
+                //如果長度是否大於2，目前在Unicode標準中，漢字的Char Code範圍是[0x4E00, 0x9FA5]
+            else if (NameLen >= 2) {
+                for (var i = 0; i < NameLen; i++) {
+                    var ChrName = Name.charCodeAt(i);
+                    if (ChrName >= 0x4E00 && ChrName <= 0x9FA5)
+                        flag1 = true;
+                    if (flag1) break;
+                }
+                if (flag1) 
+                    document.getElementById("idname").innerHTML="<img src='images/correct1.jpg'> correct";
+                else
+                    document.getElementById("idname").innerHTML="<img src='images/error.png'> incorrect";
+            }
+            else
+            document.getElementById("idname").innerHTML="<img src='images/goback.jpg'> Name length must be greater than 2";
+        }
+        
+            //   checkpassword
+            document.getElementById("idpwd").addEventListener("blur",chkpwd);
+            function chkpwd() {
+                var thePwd = document.getElementById("idpwd").value;
+                var thePwdLen = thePwd.length;
+                var flag1 = false, flag2 = false ,flag3 = false;
+                Chrarray = /[!@#$%^&*]+/;
+                //判斷元素值是否為空白，密碼長度是否大於6
+                if (thePwd == "")
+                    document.getElementById("idsp").innerHTML="<img src='images/error.png'> you must enter";
+                    //如果長度是否大於6，判斷是否包含字母、數字、特殊符號a1@
+                else if (thePwdLen >= 6) {
+                    //alert(">=6");
+                    for (var i = 0; i < thePwdLen; i++) {
+                        var PwdChr = thePwd.charAt(i).toUpperCase();//轉換為大寫
+                        if (PwdChr >= "A" && PwdChr <= "Z"){
+                            flag1 = true;
+                        }else if (PwdChr >= "0" && PwdChr <= "9")
+                            flag2 = true;
+                        else if (Chrarray.test(PwdChr))
+                            flag3 = true;   
+                        if (flag1 && flag2 && flag3) break;
+                    }
+                    if (flag1 && flag2 && flag3) 
+                        document.getElementById("idsp").innerHTML="<img src='images/correct1.jpg'> correct";
+                    else
+                        document.getElementById("idsp").innerHTML="<img src='images/error.png'> incorrect";
+                }
+            else
+            document.getElementById("idsp").innerHTML="<img src='images/goback.jpg'> Password length must be greater than 6";
+        }
+            
+            //    checkdate
+        document.getElementById("date").addEventListener("blur",chkdate);
+        function chkdate() {
+                var strDate = document.getElementById("date").value;
+                var strDateAry=strDate.split("/");
+                var d=new Date(strDateAry[0],strDateAry[1]-1,strDateAry[2]);
+                var theYear = d.getFullYear()-1911;
+                var theDate = d.getDate();
+                var theMonth = d.getMonth()+1;
+                if(theDate == "Invaild Date")       //日期不符合 or 大於31
+                    document.getElementById("iddate").innerHTML="<img src='images/error.png'> incorrect";
+                else if(theMonth != strDateAry[1])  //
+                    document.getElementById("iddate").innerHTML="<img src='images/error.png'> incorrect";
+                else
+                    document.getElementById("iddate").innerHTML="<img src='images/correct1.jpg'> correct"; 
+        }
+    </script>
+</body>
+</html>

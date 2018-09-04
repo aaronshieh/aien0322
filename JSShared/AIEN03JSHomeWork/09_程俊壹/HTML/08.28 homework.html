@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>homework</title>
+    <style>
+        fieldset{
+            width:500px;
+            margin:15px;
+            border:1px solid rgb(79, 128, 0);
+            border-radius: 15px;
+
+        }
+        .st1{
+            width:450px;
+            margin:20px;
+            border-bottom: 1px solid gray;
+            padding-bottom: 10px;
+        }
+        .st2{
+            width:450px;
+            margin:20px;
+            text-align:center;
+        }
+    
+    
+    
+    
+    
+    </style>
+
+</head>
+<body>
+<form action="#" method= "get">
+    <fieldset>
+        <legend>Form Check</legend>
+        <div class="st1">
+            <label for="account">姓名:</label><input type="text" id="account" name="account"  placeholder="guest">
+            <span id="sp0"></span><br>
+            <span style="font-size:12px">(1.不可空白，2.至少兩個字以上，3.必須全部為中文字)</span>
+        </div>
+        <div class="st1">
+            <label for="pwd">密碼:</label><input type="password" id="pwd" name="pwd" maxlength="8" required="required" placeholder="請輸入密碼">
+            <span id="sp1"></span><br>
+            <span style="font-size:12px">(1.不可空白，2.至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*])</span>
+            
+        </div>
+        <div class="st1">
+            <label for="date">日期:</label><input type="text" id="date" name="date"  placeholder="ex:2000/2/29">
+            <span id="sp2"></span><br>
+            <span style="font-size:12px">格式:西元年/月/日 yyyy/MM/dd</span>
+        </div>
+        <div class="st2">
+            <input type="submit" value="送出">
+            <input type="reset" value="清除">
+        </div>
+        
+    </fieldset>
+</form>
+<script>
+    function chkname(){
+        var name = document.getElementById("account").value;
+        var namelen = name.length;
+        if (name ==""){
+            document.getElementById("sp0").innerHTML = "<img src='../images/error.png'>姓名不可為空白";
+        }
+        else if (namelen>=2){
+            for (i=0;i<=namelen;i++){
+                if ( name.charCodeAt(i) < 0x4E00 || name.charCodeAt(i) > 0x9FA5){
+                    document.getElementById("sp0").innerHTML = "<img src='../images/error.png'>請輸入中文字";
+                    break;
+                }
+                else document.getElementById("sp0").innerHTML = "<img src='../images/check.png'>正確";
+
+            }
+        }
+        else document.getElementById("sp0").innerHTML = "<img src='../images/error.png'>姓名要大於兩個字";
+    }
+    function chkpwd(){
+        var passwd = document.getElementById("pwd").value;
+        var pwdlen = passwd.length;
+        var re=/^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W).+$/;
+        if (passwd ==""){
+            document.getElementById("sp1").innerHTML = "<img src='../images/error.png'>密碼不可為空白";
+        }
+        else if (pwdlen<6){
+            document.getElementById("sp1").innerHTML = "<img src='../images/error.png'>密碼至少要6個字"
+
+        }
+        else if (re.test(passwd)){
+            document.getElementById("sp1").innerHTML = "<img src='../images/check.png'>正確";
+        }
+        else document.getElementById("sp1").innerHTML = "<img src='../images/error.png'>密碼格式不符";
+    };
+    function chkdate(){
+        
+        var tdate = new Date(document.getElementById("date").value);
+        var ckdate = tdate.getDate();
+        var ckdt = document.getElementById("date").value.substr(-2,2); 
+        if (ckdt == ckdate){
+            document.getElementById("sp2").innerHTML = "<img src='../images/check.png'>正確";
+        }
+        else document.getElementById("sp2").innerHTML = "<img src='../images/error.png'>日期格式不符";
+    }
+    document.getElementById("account").addEventListener("blur",chkname);
+    document.getElementById("pwd").addEventListener("blur",chkpwd);
+    document.getElementById("date").addEventListener("blur",chkdate);
+  
+</script>
+
+
+    
+</body>
+</html>

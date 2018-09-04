@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>評分系統</title>
+    <style>
+   .n{
+        filter:grayscale(1);
+   }
+   .s{
+        filter:grayscale(0);
+   } 
+   
+    
+    
+    </style>
+</head>
+<body>
+        <img id="img1" class="n" src="Lab06/Images/chngstar.gif" />
+        <img id="img2" class="n" src="Lab06/Images/chngstar.gif" />
+        <img id="img3" class="n" src="Lab06/Images/chngstar.gif" />
+        <img id="img4" class="n" src="Lab06/Images/chngstar.gif" />
+        <img id="img5" class="n" src="Lab06/Images/chngstar.gif" />
+        <div id="iddiv"></div>
+        <script>
+            var imgs = document.querySelectorAll("img.n");
+            var real = true; 
+            
+            for(i = 0 ;i <imgs.length ; i++ ){
+                imgs[i].addEventListener("mouseover",mouseOver);
+                imgs[i].addEventListener("mouseout",mouseOut);
+                imgs[i].addEventListener("click",Click);
+                imgs[i].addEventListener("dblclick",douClick);
+            }    
+    
+            function mouseOver() {
+                if(real){
+                var starNo=this.id.substr(3);
+                    for(var i=0;i<starNo;i++){
+                    imgs[i].className="s";
+                        }
+                    
+                }
+            }
+            function mouseOut() {
+                if(real){    
+                var starNo=this.id.substr(3);
+                    for(var j=0;j<starNo;j++){
+                    imgs[j].className="n";
+                        }
+                    }
+                    
+            }
+            function Click() {
+                var starNo=this.id.substr(3);
+                real = false;
+                    for(var j=0;j<starNo;j++){
+                    imgs[j].className="s";
+                        }
+                        document.getElementById("iddiv").innerHTML=starNo+"顆星星";
+            }  
+            function douClick() {
+                real = true;
+                // if(real){    
+                
+                    for(var j=0;j<5;j++){
+                    imgs[j].className="n";
+                        // }
+                    }
+                
+                    }           
+        
+        </script>
+</body>
+</html>

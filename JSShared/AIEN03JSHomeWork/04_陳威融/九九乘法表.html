@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="styles.css" ></script>
+    <title> Table</title>
+</head>
+<body>
+    <script>
+        document.write("<table bordercolor='#85754D' border='1px black solid'style='color:#4B2E83;background-color:#B7A57A'>");
+        for(var i = 1; i < 10; i++) {
+            document.write("<tr>")
+            for(var j = 2; j < 10; j++) {
+                document.write("<td style='width:30px;text-align:center;font-weight:bold'>" + j +"*" + i + "=" + i*j + "</td>");
+            }
+            document.write("</tr>")
+        }
+        document.write("</table>")
+    </script>
+</body>
+</html>

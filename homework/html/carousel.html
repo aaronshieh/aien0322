@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carousel</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="../js/carousel.js"></script>
+    <style>
+        img#imgMovie {
+            width:357px;
+            height:500px;
+            cursor:pointer;
+        }
+        img.imgSmall {
+            width:100px;
+            height:140px;
+        }
+        img.imgSmall.active {
+            filter: grayscale(0);
+        }
+        img.imgSmall.inactive {
+            filter: grayscale(1) opacity(0.5);
+
+        }
+        div.content {
+            text-align: center;
+            background: -webkit-linear-gradient(top, rgb(62, 92, 129), black);
+            padding: 20px 0 100px 0;
+            height: 750px;
+        }
+        input {
+            height: 50px;
+            padding: 10px;
+            color: white;
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-div">
+            <nav id="nav">
+                <a href="multiplicationtable.html">九九乘法表</a>
+                <a href="formcheck.html">表格驗證</a>
+                <a href="rating.html">評分</a>
+                <a href="carousel.html">圖形連播</a>
+                <a href="calendar.html">日曆</a>
+            </nav>
+        </div>
+    </header>
+    <div class="content">
+        <img id="imgMovie" src="../images/movie1.jpg"><br>
+        <img id="imgSmall1" class="imgSmall active" src="../images/movie1.jpg">
+        <img id="imgSmall2" class="imgSmall inactive" src="../images/movie2.jpg">
+        <img id="imgSmall3" class="imgSmall inactive" src="../images/movie3.jpg">
+        <img id="imgSmall4" class="imgSmall inactive" src="../images/movie4.jpg">
+        <img id="imgSmall5" class="imgSmall inactive" src="../images/movie5.jpg"><br>
+        <input type="button" id="prev" value="&lt;">
+        <input type="button" id="play" value="pause">
+        <input type="button" id="next" value="&gt;">
+    </div>
+</body>
+</html>

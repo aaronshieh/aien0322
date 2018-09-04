@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>01varDeclarationTypeTransfer.html</title>
+</head>
+<body>
+    <script>
+        //1.變數宣告
+        var a;
+        //定義初始值
+        a=10;
+        //2.變數宣告時可以同時賦予初始值
+        var a = 10;
+
+        //3.不宣告變數，直接賦予初始值
+        a=10;
+        //列印及typeof
+        // document.write("a="+a);
+        document.write("a=" + a + " typeof a=" + typeof a + "<br>");  //number
+
+        //字串變數
+        a="abc";
+        document.write("a=" + a + " typeof a=" + typeof a + "<br>");  //string
+        // "a+b"
+        document.write("\"a+b\""+"<br>");
+        // \a+b\
+        document.write("\\a+b\\"+"<br>");
+        document.write("\u4e01"+"<br>");
+        //布林變數
+        var b=true;
+        var c=b+1;
+        document.write("b="+b+" typeof b=" + typeof b+"<br>");  //boolean
+        document.write("c="+c+" typeof c=" + typeof c+"<br>");  //number
+        // if(0)
+        //     window.alert(true);
+        // else
+        //     alert(false);
+
+        //null
+        var n=null;
+        document.write("n="+n+" typeof n=" + typeof n+"<br>");  //object
+        //如果沒有初始值，JavaScript會自動將變數的值初始化為undefined(預設值 default value)
+        var u;
+        document.write("u="+u+" typeof u=" + typeof u+"<br>");  //undefined undefined
+
+        //===============================
+        //建立物件，語法一
+        var person=new Object();  
+        //定義物件屬性
+        person.name="Jack";
+        person.ID="A123456789";
+        person.age=35;
+        document.write(person.name+","+person["age"]+"<br>");
+
+        //建立物件，語法二
+        var cars={brand:"audi","max speed":300};
+        document.write(cars.brand+"="+cars["max speed"]+"<br>");
+
+
+        //parseInt
+        document.write("parseInt('123.45')="+parseInt('123.45')+"<br>");
+        document.write("parseInt('12a3.45')="+parseInt('12a3.45')+"<br>");
+        document.write("parseInt('a123.45')="+parseInt('a123.45')+"<br>");
+    </script>
+</body>
+</html>

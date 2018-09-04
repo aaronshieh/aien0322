@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <title>Document</title>
+    <style>
+        #pic{width:350px }
+    </style>
+</head>
+<body>
+    <img id="pic" src="Images/ad001.jpg">
+    <input type="button" id="idpause" value="pause">
+    <input type="button" id="idplay" value="play">
+   
+    <script>
+        document.getElementById("idpause").addEventListener("click",pause);
+        document.getElementById("idplay").addEventListener("click",play);
+
+        var picAry=["Images/ad001.jpg", "Images/ad002.jpg", "Images/ad003.jpg", "Images/ad004.jpg", "Images/ad005.jpg"]
+        var count=1;
+        
+        function setclock(){
+            count++;
+            console.log(count);
+            if(count>=5) count=0;
+            document.getElementById("pic").src=picAry[count];
+        }
+       var t= window.setInterval(setclock,1500);
+
+        function pause(){
+            window.clearInterval(t);
+        }
+
+        function play(){
+            t=window.setInterval(setclock,1500);
+        }
+    </script>
+</body>
+</html>

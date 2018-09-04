@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表單輸入驗證</title>
+    <link rel="stylesheet" href="style/hw02_inputCheck.css">
+    <script>
+        window.onload = function () {
+            document.getElementById("account").addEventListener("blur", chkName);
+            document.getElementById("pwd").addEventListener("blur", chkPassword);
+            document.getElementById("date").addEventListener("blur", chkDate);
+            document.getElementById("btnsubmit").addEventListener("click", chkSend);
+            document.getElementById("btnreset").addEventListener("click", reset);
+        }
+    </script>
+    <script src="script/hw02_inputCheck.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <article>
+            <form id="form1" action="#" method="get">
+                <fieldset>
+                    <legend>Form Check</legend>
+                    <div>
+                        <label for="account">姓名：</label>
+                        <input type="text" name="account" id="account" autocomplete="off" placeholder="請輸入姓名" /><span id="acccheck"></span>
+                        <br/>
+                        <p>(1.不可空白，2.至少兩個字，3.必須為中文字)</p>
+                    </div>
+                    <div>
+                        <label for="pwd">密碼：</label>
+                        <input type="password" name="pwd" id="pwd" placeholder="請輸入密碼" /><span id="pwdcheck"></span><br />
+                        <p>(1.不可空白，2.不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元[[!@#$%^&*])</p>
+                    </div>
+                    <div>
+                        <label for="date">日期：</label>
+                        <input type="text" name="date" id="date" placeholder="ex:2000/2/29" /><span id="dcheck"></span><br
+                        />
+                        <p>(格式：西元年/月/日 ex:2000/2/29)</p>
+                    </div>
+                    <p class="pbtn">
+                        <input type="button" id="btnsubmit" value="送出" />
+                        <input type="reset" id="btnreset" value="清除" />
+                    </p>
+                </fieldset>
+            </form>
+        </article>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zn-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div1 {
+            border: 1px solid black;
+            width:450px;
+            height: 400px;
+            background-color: burlywood;
+            border-radius:10px;
+            padding: auto;
+
+        }
+        .span_style {
+            color:gray;
+            font-size: 70%;
+        }
+        .sub {
+            width:450px;
+            /* margin:20px; */
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <legend>Form Check</legend>
+    <div class="div1">
+        <div>
+        <label for="">姓名:</label>
+        <input type="type" id="name" value="">
+        <span id="span1"></span>
+        <br>
+        <span class="span_style">(1.不可留白,2.至少兩個字以上,3.必須全部為中文字)</span>
+
+        
+        <hr>
+        <label for="">密碼:</label>
+        <input type="type" id="passwords" value="">
+        <span id="span2"></span>
+        <br>
+        <span class="span_style">(1.不可留白,2.至少6個字必須包含英文字母 數字 特殊字元!@#$%^&*)</span>
+
+        <hr>
+        <label for="">日期:</label>
+        <input type="type" id="date" value="">
+        <span id="span3"></span>
+        <br>
+        <span class="span_style">格式:西元年/月/日 yyyy/mm/dd</span>
+
+        </div>
+
+        <hr>
+        <div class="sub">
+        <input type="submit" value="送出">
+        <input type="reset" value="清除">
+        </div>
+    </div>
+    <script>
+        // var theName = document.getElementById("name").value;
+        // var theNameLen = theName.length;
+        document.getElementById("name").addEventListener("blur", checkName);
+        document.getElementById("name").addEventListener("focus", checkName);   //function沒有還是可以focus
+        // document.getElementById("name").addEventListener("change", checkName);
+        function checkName(){
+            var theName = document.getElementById("name").value;
+            var theNameLen = theName.length;
+            // alert(theName.charCodeAt(1));
+            // alert(theNameLen);
+                if (theNameLen == 0){
+                    document.getElementById("span1").innerHTML = "<img src='image/error.png' >must enter";
+                }
+                else if (theNameLen == 1){
+                    document.getElementById("span1").innerHTML = "<img src='image/error.png'>名字至少兩個字以上";
+                }
+                else if (theNameLen > 1){
+                    for (var i=0; i<theNameLen; i++){
+                        if (theName.charCodeAt(i)<0x4E00 || theName.charCodeAt(i)>0x9FA5){
+                            document.getElementById("span1").innerHTML = "<img src='image/error.png'>必須全部為中文字";
+                            // alert(theName[0]);
+                        }
+                        else {
+                            document.getElementById("span1").innerHTML = "<img src='image/check.png'>正確";
+                        }//else
+                    }//for    
+                }//else if
+
+            }//function checkName
+     
+            // document.getElementById("span1").textContent = "正確";
+        
+        
+
+        //@@@@ passwords 
+        document.getElementById("passwords").addEventListener("blur", checkPasswords);
+        document.getElementById("passwords").addEventListener("focus", checkPasswords);
+        // document.getElementById("passwords").addEventListener("change", checkPasswords);
+        function checkPasswords() {
+            var thePasswords = document.getElementById("passwords").value;
+            var thePasswordsLen = thePasswords.length;
+            var specialChr = ["!", "@", "#", "$", "%", "^", "&", "*"];
+            // a1 = thePasswords.toUpperCase();
+            // alert(specialChr[0]);
+            // alert(thePasswordsLen);
+            if (thePasswordsLen == 0){
+                document.getElementById("span2").innerHTML = "<img src='image/error.png'>must enter";
+            }
+            else if (thePasswordsLen<6){
+                document.getElementById("span2").innerHTML = "<img src='image/error.png'>密碼至少6個字元以上";
+            }    
+            else {  
+                var juge1 = false;
+                var juge2 = false;
+                var juge3 = false;
+                for (var j=0; j<thePasswordsLen;j++){
+                    tpws = thePasswords.toUpperCase()
+                    if (tpws.charCodeAt(j)>=65 && tpws.charCodeAt(j)<=90){
+                        juge1 = true;
+                    // document.getElementById("span2").textContent = "密碼必須包含英文字母 數字 特殊字元";
+                    }
+                    else if (tpws.charCodeAt(j)>=48 && tpws.charCodeAt(j)<=57){
+                        juge2 = true;
+                    }
+                    else {
+                    for (var k=0; k<8; k++){
+                        // alert(thePasswords.indexOf(specialChr[k]));
+                        if (thePasswords.indexOf(specialChr[k])!=-1){
+                            juge3 = true;
+                            // break;
+                        }
+                    }//for
+                    }//else    
+                }//for      
+                if ((juge1 && juge2 && juge3) == 0){
+                            document.getElementById("span2").innerHTML = "<img src='image/error.png'>密碼必須包含英文字母 數字 特殊字元";
+                        }
+                else if ((juge1 && juge2 && juge3) == 1) {
+                            document.getElementById("span2").innerHTML = "<img src='image/check.png'>正確";
+                            // break;                          
+                        }//else if                    
+            }//else
+        }//function checkPasswords()
+
+        //@@@@ check date        
+        document.getElementById("date").addEventListener("blur", checkDate);
+        document.getElementById("date").addEventListener("focus", checkDate);
+        // document.getElementById("date").addEventListener("change", checkDate);            
+    
+        function checkDate(){
+            var theDate = document.getElementById("date").value;
+            // var theDateLen = theSate.length;
+            var correctDate = new Date(theDate);
+            // alert(theDate);
+            // alert(correctDate);
+            // alert(correctDate.getMonth());
+            var theDateAry = theDate.split("/");
+            // var correctDateAry = correctDate.split("/");
+            if (theDate == ""){
+                document.getElementById("span3").innerHTML = "<img src='image/error.png'>must enter";
+            }
+            else if (correctDate == "Invalid Date"){
+                document.getElementById("span3").innerHTML = "<img src='image/error.png'>日期不正確";
+            }
+            else if (theDateAry[1] != correctDate.getMonth()+1){
+                document.getElementById("span3").innerHTML = "<img src='image/error.png'>日期不正確";
+            }
+            else {
+                document.getElementById("span3").innerHTML = "<img src='image/check.png'>正確";
+            }
+        }//function checkDate
+
+
+
+
+        // function checkname(){
+        //     var theName = document.getElementById("name").value;
+        // 
+        //     var theNameLen = theName.length;
+            
+            
+        //     // if (theName == "1"){
+                
+                
+        //     // }
+            
+
+        // }
+    </script>
+</body>
+</html>

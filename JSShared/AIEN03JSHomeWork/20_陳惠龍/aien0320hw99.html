@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>HW0827.html</title>
+    <style>
+        table,td{border:1px rgb(160, 108, 156) solid; color:rgb(34, 7, 22); background-color:rgb(248, 225, 204) }
+    </style>
+</head>
+<body>
+    <script>
+        /* 99乘法表*/
+        document.write("<table><tr>");
+        for (var i=2; i < 10; i++)
+        {
+            document.write("<td>");
+            for(var j=1; j < 10; j++)
+            {
+                document.write(i+"*"+j+"="+i*j+"<br>");
+            }
+            document.write("</td>");
+        };
+        document.write("</tr></table>");
+    </script>
+</body>
+</html>

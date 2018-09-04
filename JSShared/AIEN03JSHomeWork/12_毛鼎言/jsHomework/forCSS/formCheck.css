@@ -1,0 +1,19 @@
+form{
+    width: 400px;
+    margin: auto;
+}
+fieldset{
+    text-align: center;
+    padding: 1em;
+    border-radius: 20px;    
+}
+p{
+    font-size: 12px;
+}
+legend{
+    margin:auto;
+    padding: 0px 6px;
+    font: 26px bold ;
+    font-family: "標楷體";
+}
+

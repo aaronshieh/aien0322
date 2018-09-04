@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript HW 01</title>
+    <style>
+        table{
+            border-collapse:collapse;
+        }
+
+        td{
+            border: 2px solid silver;
+            font-size: 20px;
+            color:rgb(60, 141, 212);
+            background-color: rgb(240, 234, 227);
+            padding-left:48px;
+            width:100px;
+            line-height: 24px;
+            }
+    </style>
+    </head>
+   
+    <body>
+        <table>
+        <script>
+        for (j=1;j<10;j++){
+            document.write('<tr>')   
+            for (i=2;i<10;i++){
+                document.write('<td>'+i+'x'+j+'='+ i*j +'</td>')
+            }
+            document.write('</tr>')
+        }
+    
+
+        </script>
+        </table>
+    
+    
+    </body>
+</html>

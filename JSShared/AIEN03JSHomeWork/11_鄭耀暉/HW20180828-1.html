@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ZH-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    form {
+        background-color:white;
+        border:thin solid whitesmoke;
+        border-radius:10px;
+        margin:auto;
+        height:30em;
+        width:80%;
+    }
+    label{
+        /* background-color:#00aeae; */
+        /* border:thin dashed red; */
+        /* border-radius:5px; */
+        /* margin:auto; */
+        /* width:80%; */
+        /* height:250px; */
+    }
+    fieldset{
+        background-color:#ffffff;
+        border:thin solid #00bb00;
+        border-radius:10px;
+        margin:auto;
+        margin-top:5em;
+        width:20em;
+        height:20em;
+    }
+    legend{
+        /* background-color:#f38484; */
+        /* border:thin dashed red; */
+        /* border-radius:5px; */
+        margin-left:1em;
+        /* width:80%; */
+        /* height:250px; */
+    }
+    div {
+        background-color:white;
+        /* border:thin dashed #d0d0d0; */
+        border-radius:5px;
+        margin:2em;
+        height:15em;
+        width:35em;
+    }
+    input{
+        /* background-color:#93ff93; */
+    }
+    span{
+        font-size:0.8em;
+    }
+    #lb1{
+        /* background-color:#c03535; */
+        /* border:thin dashed yellow; */
+        /* border-radius:5px; */
+        margin-left:2em;
+        /* width:80%; */
+        /* height:50px; */
+    }
+    #remind{
+        /* background-color:#00aeae; */
+        /* border:thin dashed red; */
+        /* border-radius:5px; */
+        margin-left:3em;
+        width:90%;
+        /* height:250px; */
+        font-size:0.8em;
+        color:#bebebe;
+        /* line-height: */        
+    }
+    #bttn{
+        /* background-color:wheat; */
+        margin:auto;
+        width:5em;
+    }
+    </style>
+    <script>
+        function f1(){console.log('Func 1-click');};
+        function f2(){console.log('Func 2-dblclick');};
+        function f3(){console.log('Func 3-mouseover');};
+        function f4(){console.log('Func 4-mouseout');};
+        function f5(){console.log('Func 5-blur');};
+        function f6(){console.log('Func 6-focus');};
+        function f7(){console.log('Func 7-change');};
+        function f8(){console.log('Func 8-sunmit');};
+    </script>
+</head>
+<body><script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='/browser-sync/browser-sync-client.js?v=2.23.6'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
+    <form>
+        <label></label>
+        <fieldset>
+            <legend>Form Check</legend>
+            <div>
+                <label for="iName" id="lb1">姓名:</label>
+                <input type="text" id="iName" name="aName" value="王建民" maxlength="12" >
+                <span id="nmchk"></span>
+                <p id="remind">(1.不可空白2.至少兩個字以上3.必須全部為中文字)</p>
+                <hr style="margin:1em">
+
+                <label for="iPwd" id="lb1">密碼:</label>
+                <input type="password" id="iPwd" name="aPwd" value="請輸入密碼" maxlength="12">
+                <span id="pwchk"></span>
+                <p id="remind">(1.不可空白2.至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*])</p>
+                <hr style="margin:1em">
+
+                <label for="iDate" id="lb1">日期:</label>
+                <input type="text" id="iDate" name="aDate" value="">
+                <span id="dtchk"></span>
+                <p id="remind">(格式:西元年/月/日 yyyy/MM/dd)</p>
+                <hr style="margin:1em">
+
+                <p id="bttn">
+                <input type="submit" value="送出">
+                <input type="reset" value="清除">
+                </p>
+            </div>
+
+        </fieldset>
+    </form>
+    <script>
+        // 檢查名字
+        function chkName(){
+            var ok=false;
+            var iNv=document.getElementById("iName").value.trim();
+            if (iNv=="") {
+                document.getElementById("nmchk").textContent="密碼不可為空白";
+                console.log('null check passed!')
+            }
+            else if (!/^[\u4E00-\u9FA5]+$/.test(iNv)){
+                document.getElementById("nmchk").textContent="請全部輸入中文字";
+                console.log('not Chinese check passed!');     
+            }
+            else if (iNv.length<2){
+                document.getElementById("nmchk").textContent="請輸入最少兩個字";
+                console.log('length check passed! length='+iNv.length);
+            }
+            else{
+                document.getElementById("nmchk").textContent="正確";
+                ok=true;
+            }
+            console.log(iNv + ok);
+            return ok;
+        }
+        document.getElementById("iName").addEventListener("blur", chkName);
+        console.log(chkName);
+        // 檢查密碼
+        function chkPwd(){
+            var ok=false;
+            var iNv=document.getElementById("iPwd").value;
+            if (iNv=="") {
+                document.getElementById("pwchk").textContent="不可為空白";
+                console.log('null check passed!')
+            }
+            else if (iNv.length<6){
+                document.getElementById("pwchk").textContent="請輸入最少六個字";
+                console.log('length check passed! length='+iNv.length);
+            }
+            else if (!/[A-Za-z]+/.test(iNv)){
+                document.getElementById("pwchk").textContent="請加入英文字母";
+                console.log('Alphabet check passed!'+'ASCII='+ iNv.charCodeAt(0));     
+            }
+            else if (!/[0-9]+/.test(iNv)){
+                document.getElementById("pwchk").textContent="請加入數字";
+                console.log('Digit check passed!'+'ASCII='+ iNv.charCodeAt(0));     
+            }
+            else if (!/[^0-9a-zA-Z]+/.test(iNv)){
+                document.getElementById("pwchk").textContent="請加入特殊字符";
+                console.log('Symbol character check passed!'+'ASCII='+ iNv.charCodeAt(0));     
+            }
+            else{
+                document.getElementById("pwchk").textContent="正確";
+                ok=true;
+            }
+            console.log(iNv + ok);
+            return ok;
+        }
+        // 檢查日期
+
+        function chkDate(){
+            var ok=false;
+            var iNv=document.getElementById("iDate").value.trim();
+            function DateError(){
+                var dtA1=iNv.split(/[\/\s\\]+/);
+                    console.log('dtA1='+dtA1+' Type:'+typeof(dtA1)+'by'+typeof(dtA1[1]));
+                    console.log('iNv in='+iNv);
+                iNv=dtA1[0]+'/'+dtA1[1]+'/'+dtA1[2];
+                    console.log('iNv out='+iNv)    
+                var dnA1=[Number(dtA1[0]),Number(dtA1[1]),Number(dtA1[2])];
+                    console.log('dnA1='+dnA1+' dnA1[1]='+dnA1[1]+typeof(dnA1[1]));
+                var Di=new Date(dnA1);
+                    console.log('Di='+ Di);
+                var dnA2=[Di.getFullYear(),Di.getMonth()+1,Di.getDate()];
+                    console.log('dnA2='+dnA2+' dnA2[1]='+dnA2[1]+typeof(dnA2[1]));
+                    console.log('\n'+dnA1+'\n'+dnA2)
+                if (dnA1[0]==dnA2[0]&&dnA1[1]==dnA2[1]&&dnA1[2]==dnA2[2]) return false
+                else return true
+            }
+            if (!/^\d{4}[/\-\s\\]+\d{1,2}[/\-\s\\]+\d{1,2}$/.test(iNv)){
+                document.getElementById("dtchk").textContent="格式不正確";
+                console.log('Symbol character check passed!'+'ASCII='+ iNv.charCodeAt(0));   
+            }
+            else if (DateError()){
+                document.getElementById("dtchk").textContent="日期不正確";
+            }
+            else{
+                document.getElementById("dtchk").textContent="正確";
+                ok=true;
+            }
+            console.log(iNv +'is right date.'+ ok +'DateError(iNv)='+ DateError(iNv));
+            if (ok){
+                console.log('iNv out='+iNv+' type:'+typeof(iNv));
+                document.getElementById("iDate").outerHTML='<input type="text" id="iDate" name="aDate" value="'+iNv+'">';
+            }
+            return ok;
+        }
+        
+        document.getElementById("iName").addEventListener("blur", chkName);
+        // console.log('Name OK is ' + chkName);
+        document.getElementById("iPwd").addEventListener("blur", chkPwd);
+        // console.log('Password OK is ' + chkPwd);
+        document.getElementById("iDate").addEventListener("blur", chkDate);
+        // console.log('Date OK is '+ chkDate);
+
+        // document.getElementById("iName").addEventListener("click", f1, false);
+        // document.getElementById("iName").addEventListener("dblclick", f2);
+        // document.getElementById("iName").addEventListener("mouseover", f3);
+        // document.getElementById("iName").addEventListener("mouseout", f4);
+        // document.getElementById("iName").addEventListener("blur", f5);
+        // document.getElementById("iName").addEventListener("focus", f6);
+        // document.getElementById("iName").addEventListener("change", f7);
+        // document.getElementById("iName").addEventListener("submit", f8);
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>01functionMethod.html</title>
+</head>
+<body>
+
+    <script>
+        //==========定義函式==================
+        //方法一函式宣告，定義帶參數的函式
+        function fAdd1(a,b){
+            // alert(b);
+            return (a+b);
+        }
+        //==========函式呼叫==================
+        //呼叫帶參數的函式
+        document.write("fAdd1(10,20)="+fAdd1(10,20)+"<br>");
+        // document.write("fAdd1(10)="+fAdd1(10)+"<br>");
+
+        //==========定義函式==================
+        //方法二函式實字
+        var fAdd2=function(a,b){
+            return (a+b);
+        }
+        document.write("fAdd2(30,20)="+fAdd2(30,20)+"<br>");    
+
+        //列印函式內容
+        var a=10;
+        document.write("fAdd2="+fAdd2+"<br>");
+        document.write("fAdd1="+fAdd1+"<br>");
+        fAdd2=fAdd1;
+        document.write("fAdd2="+fAdd2+"<br>");
+
+
+        //==========方法製作==================
+        //定義物件
+        var cars={brand:"audi","max speed":300};
+
+        //定義物件方法一(使用函式實字)
+        cars.print1=function(){
+            return this.brand+","+this["max speed"]
+            };
+
+        //定義物件方法二(使用函式宣告)
+        function printf(){
+            return (this.brand+"-"+this["max speed"]);
+        }
+        cars.print2=printf;
+
+        //方法呼叫
+        document.write(cars.print1()+"<br>");
+        document.write(cars.print2()+"<br>");
+
+        // if(cars.print1)
+        //     alert("support");
+        // else
+        //     alert("not support");
+
+        if(window.alert)
+            alert("support");
+        else
+            alert("not support");
+
+
+    </script>
+</body>
+</html>

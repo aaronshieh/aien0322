@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ZH-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HomeWork-20180827-Hubert</title>
+    <style>
+    *{
+        margin:0;
+        padding:0px;
+    }
+
+    table{
+        background-color:#28ff28;
+        border:2px #2828ff solid;
+        margin:50px;
+        border-collapse:collapse
+        /* border-spacing:0; */
+    }
+    
+    td{
+        background-color:#4dffff;
+        border:1px #2828ff solid;
+        color:red;
+        padding:0.3em;
+        /* border-spacing: 0; */
+    }
+
+    </style>
+    <script>
+    </script>
+</head>
+
+<body>
+
+    <script>
+        document.write('<table>');
+        document.write('<tr>');
+        for (i=2;i<10;i++)
+        {
+            document.write('<td>');
+            for (j=1;j<10;j++)
+            {
+                document.write(i+'*'+j+'='+i*j+'<br>');
+            };
+            document.write('</td>');
+        };
+        document.write('</tr>');
+        document.write('</table>');
+    </script>
+</body>
+</html>

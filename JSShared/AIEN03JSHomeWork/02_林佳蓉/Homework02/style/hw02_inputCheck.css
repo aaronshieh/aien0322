@@ -1,0 +1,51 @@
+* {
+    font-family: '微軟正黑體';
+}
+
+fieldset {
+    border: 3px solid brown;
+    border-radius: 15px;
+}
+
+legend {
+    font-size: 30px;
+    font-weight: bolder;
+    color: brown;
+    text-shadow: 5px 5px 10px gray;
+
+}
+
+form {
+    width: 600px;
+    margin: 0 auto;
+}
+
+p {
+    font-size: 10px;
+    color: gray;
+}
+
+form div {
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+span {
+    font-size: 10px;
+}
+
+.pbtn {
+    text-align: center
+}
+
+.err {
+    font-size: 10px;
+    font-style: italic;
+    color: red;
+}
+
+.chk {
+    font-size: 10px;
+    color: black;
+    font-style: normal;
+}

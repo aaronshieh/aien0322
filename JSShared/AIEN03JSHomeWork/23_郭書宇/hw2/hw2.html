@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        fieldset {
+            text-shadow: 100px;
+            width: 700px;
+            margin: auto;
+            line-height: 25px;
+            border-radius: 15px;
+            border: 3px #2894ff solid;
+        }
+
+        fieldset legend {
+            margin-left: 20px;
+        }
+
+        fieldset div {
+            margin-left: 50px;
+        }
+
+        fieldset p {
+            margin-left: 50px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <legend>Form Check</legend>
+        <div>
+            <label for="account">姓名：</label>
+            <input type="text" name="account" id="name" autocomplete="off" required placeholder="請輸入姓名" /><span id="nacheck"></span><br
+            />
+            <p>(不可空白,至少兩個字且必須為中文字)</p>
+        </div>
+        <div>
+            <label for="pwd">密碼：</label>
+            <input type="text" name="pwd" id="pwd" placeholder="請輸入密碼" /><span id="pwdcheck"></span><br />
+            <p>(不可空白,不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元[[!@#$%^&*])</p>
+        </div>
+        <div>
+            <label for="date">日期：</label>
+            <input type="text" name="date" id="date" placeholder="ex:2000/2/29" /><span id="dcheck"></span><br />
+            <p>(格式：西元年/月/日 ex:2000/2/29)</p>
+            <p><input type="reset" id="btnreset" value="Reset"> <input type="button" id="btnsubmit" value="Submit"></p><span
+                id="retry"></span>
+        </div>
+    </fieldset>
+
+    <fieldset id="iddisplay">
+        <legend>Input Data</legend>
+        <div>
+            <label for="account">姓名：</label>
+            <span id="idName"></span><br />
+        </div>
+        <div>
+            <label for="pwd">密碼：</label>
+            <span id="idPwd"></span><br />
+        </div>
+        <div>
+            <label for="date">日期：</label>
+            <span id="idDate"></span><br />
+        </div>
+    </fieldset>
+    <script>
+        document.getElementById("name").addEventListener("blur", chkName);
+        document.getElementById("pwd").addEventListener("blur", chkPassword);
+        document.getElementById("date").addEventListener("blur", validateDate);
+        document.getElementById("btnreset").onclick = Reset;
+        document.getElementById("btnsubmit").onclick = Submit;
+        var chna = false, chpa = false, chda = false;
+        function chkName() {
+            thename = document.getElementById("name").value;
+            var thenamelen = thename.length;
+            var flag1 = false, flag2 = false;
+            if (thename == "")
+                document.getElementById("nacheck").innerHTML = "<img src='../hw2/yes.jpg'>不能空白";
+            else if (thenamelen >= 2) {
+                flag1 = true;
+                for (var i = 0; i < thenamelen; i++) {
+                    if (thename.charCodeAt(i) < 0x4E00 || thename.charCodeAt(i) > 0x9FA5) {
+                        document.getElementById("nacheck").innerHTML = "<img src='../hw2/yes.jpg'>非中文，請重新輸入";
+                        break;
+                    }
+                    else {
+                        flag2 = true;
+                        if (flag1 && flag2)
+                            document.getElementById("nacheck").innerHTML = "<img src='../hw2/no.gif'>正確";
+                        chna = true;
+                        break;
+                    }
+                }
+            }
+            else
+                document.getElementById("nacheck").innerHTML = "<img src='../hw2/yes.jpg'>小於兩個字";
+        }
+        // (不可空白,至少兩個字且必須為中文字)
+
+        function chkPassword() {
+            thepwd = document.getElementById("pwd").value;
+            var thepwdlen = thepwd.length;
+            //取得元素值
+            var flag1 = false, flag2 = false, flag3 = false;
+            //判斷元素值是否為空白，密碼長度是否大於6
+            if (thepwd == "")
+                document.getElementById("pwdcheck").innerHTML = "<img src='../hw2/yes.jpg'>不能空白";
+            else if (thepwdlen >= 6) {
+                // document.getElementById("pwdcheck").innerHTML = "<img src='../hw2/yes.jpg'>>=6";
+                //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+                for (var i = 0; i < thepwdlen; i++) {
+                    // var chpwd= thepwd.charAt(i).toUppercase();
+                    var PwdChr = thepwd.charAt(i).toUpperCase();
+                    re = /[!@#$%^&*]/;
+                    if (PwdChr >= "A" && PwdChr <= "Z")
+                        flag1 = true;
+                    else if (PwdChr >= "0" && PwdChr <= "9")
+                        flag2 = true;
+                    else if (re.test(PwdChr))
+                        flag3 = true;
+                    if (flag1 && flag2 && flag3)
+                        break;
+                }
+
+                if (flag1 && flag2 && flag3) {
+                    document.getElementById("pwdcheck").innerHTML = "<img src='../hw2/no.gif'>正確";
+                    chpa = true;
+                }
+                else
+                    document.getElementById("pwdcheck").innerHTML = "<img src='../hw2/yes.jpg'>錯誤";
+            }
+            else
+                document.getElementById("pwdcheck").innerHTML = "<img src='../hw2/yes.jpg'>請輸入6字以上";
+        }
+
+        function validateDate() {
+            thedate = document.getElementById("date").value
+            var thedateli = thedate.split("/")
+            var oriyea = Number(thedateli[0])
+            var orimon = Number(thedateli[1])
+            var oriday = Number(thedateli[2])
+
+            var date = new Date(oriyea, orimon - 1, oriday);
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            console.info(oriyea, orimon, oriday)
+            console.info(year, month, day)
+            if (thedate == "") {
+                document.getElementById("dcheck").innerHTML = "<img src='../hw2/yes.jpg'>不能空白";
+            }
+            else {
+                if (year == oriyea && month == orimon && day == oriday) {
+                    document.getElementById("dcheck").innerHTML = "<img src='../hw2/no.gif'>正確";
+                    chda = true;
+                }
+                else {
+                    document.getElementById("dcheck").innerHTML = "<img src='../hw2/yes.jpg'>錯誤";
+                }
+            }
+        }
+
+        function Submit() {
+            if (chna && chda && chpa) {
+                document.getElementById("idName").innerHTML = thename
+                document.getElementById("idPwd").innerHTML = thepwd
+                document.getElementById("idDate").innerHTML = thedate
+                document.getElementById("retry").innerHTML = "<h2 style='color:red'; ></h2>"
+            }
+            else
+                document.getElementById("retry").innerHTML = "<h2 style='color:red'; >請修正錯誤</h2>"
+        }
+
+        function Reset() {
+            thename = "", thepwd = "", thedate = "";
+            document.getElementById("name").value = ""
+            document.getElementById("pwd").value = ""
+            document.getElementById("date").value = ""
+            document.getElementById("idName").innerHTML = ""
+            document.getElementById("idPwd").innerHTML = ""
+            document.getElementById("idDate").innerHTML = ""
+            document.getElementById("dcheck").innerHTML = ""
+            document.getElementById("pwdcheck").innerHTML = ""
+            document.getElementById("nacheck").innerHTML = ""
+        }
+    </script>
+
+</body>
+
+</html>

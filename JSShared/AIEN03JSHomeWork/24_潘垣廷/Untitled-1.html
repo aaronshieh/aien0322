@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <!-- <link href="../Styles/main.css" rel="stylesheet" /> -->
+    <style>
+        fieldset {
+            background-color: rgba(51, 230, 214,0.5);
+            border: 3px double #AFEEEE;
+        }
+
+        legend {
+            font-size: 30px;
+            color: #AFEEEE;
+            text-shadow: 5px 5px 10px gray;
+        }
+
+        form {
+            width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            width: 100px;
+            float: left;
+            text-align: center;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 5px;
+            margin-left: 100px;
+        }
+        #iddisplay{
+            display:none;
+        }
+    </style>
+</head>
+<body>        
+    <article>
+    <form action="#" method="get">
+    <fieldset>
+        <legend>Form Check</legend>
+            <div>
+                <img width="15px" src='Images/image.gif'><label for="account">姓名：</label>
+                <input type="text" name="account" id="account" autocomplete="off" placeholder="請輸入姓名" /><span id="acccheck"></span><br />
+                <p>(不可空白,至少兩個字且必須為中文字)</p>
+            </div>
+            <div>
+                <img width="15px" src='Images/image.gif'><label for="pwd">密碼：</label>
+                <input type="password" name="pwd" id="pwd" placeholder="請輸入密碼" /><span id="pwdcheck"></span><br />
+                <p>(不可空白,不包含中文字,至少6個字且必須包含英文字母、數字、特殊字元[[!@#$%^&*])</p>
+            </div>
+            <div>
+                <label for="date">日期：</label>
+                <input type="text" name="date" id="date" placeholder="ex:2000/2/29" /><span id="dcheck"></span><br />
+                <p>(格式：西元年/月/日 ex:2000/2/29)</p>
+            </div>
+            <p><input type="reset" value="Reset" /> <input type="button" id="btnsubmit" value="Submit" /></p>
+<script>
+    document.getElementById("account").addEventListener("blur",chkAccount)
+    function chkAccount(){
+        var theAcc=document.getElementById("account").value;
+        var theAccLen=theAcc.length;
+        if(theAcc=="")
+            document.getElementById("acccheck").innerHTML=("<img src='Images/error.png'>不得為空白");
+        else if (theAccLen>=2) {
+            for(var i=0;i<theAccLen;i++){
+                var AccChr=theAcc.charCodeAt(i);                
+                if (AccChr < 0x4E00 || AccChr > 0x9FD5){
+                    document.getElementById("acccheck").innerHTML="<img src='Images/error.png'>必須為中文";
+                    break;}
+                else
+                    document.getElementById("acccheck").innerHTML="<img width=15px src='Images/Apple.gif'>可行";}
+                // if (AccChr >= 0x4E00 && AccChr <= 0x9FD5)
+                //     document.getElementById("acccheck").innerHTML="<img width=15px src='Images/Apple.gif'>可行";
+                // else
+                //     document.getElementById("acccheck").innerHTML="<img src='Images/error.png'>必須為中文"; 
+        }
+        else
+            document.getElementById("acccheck").innerHTML="<img src='Images/error.png'>字數必須大於兩個!";}
+    
+    document.getElementById("pwd").addEventListener("blur",chkPassword)
+    function chkPassword(){
+        var thePwd=document.getElementById("pwd").value;
+        var thePwdLen=thePwd.length;
+        var flag1 = false, flag2 = false, flag3 = false; 
+        var reg1=/[\d]/,reg2=/[a-zA-Z]/,reg3=/[\!@#\$%\^&\*]/;
+        if(thePwd=="")
+            document.getElementById("pwdcheck").innerHTML="<img src='Images/error.png'>不得為空白!";
+        else if (thePwdLen >= 6){
+            for(var o=0;o<thePwdLen;o++){
+                var PwdChr=thePwd.charAt(o);
+                // alert(PwdChr)
+                if (PwdChr == reg1)
+                    flag1 = true;
+                else if (PwdChr ==reg2)
+                    flag2 = true;
+                else if (PwdChr == reg3)
+                    flag3 = true;
+                else 
+                    document.getElementById("pwdcheck").innerHTML="caution!"          
+                    // flag3 = reg.test(PwdChr).value;             
+                if (flag1 && flag2 && flag3) break; 
+                }
+            if (flag1 && flag2 && flag3)
+                document.getElementById("pwdcheck").innerHTML="可行"
+            else
+                document.getElementById("pwdcheck").innerHTML="缺少字元"
+        }
+        else 
+            document.getElementById("pwdcheck").innerHTML="<img src='Images/error.png'>密碼長度必須大於六!";
+    }
+</script>
+
+
+                        
+                        
+        </fieldset>
+
+                
+</body>
+</html>
